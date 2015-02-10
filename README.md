@@ -1,4 +1,6 @@
 # moc-gui
 Extending the MOC GUI
 
-Please see "MOC GUI Proposal.doc" for a rundown of the project.
+Update:
+	expecting meeting with our mentor Jon Bell on 02/11
+	
