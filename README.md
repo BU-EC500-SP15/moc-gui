@@ -1,3 +1,26 @@
+
+###Meetings Briefs 
+
+#####Meeting on 2/29 with Jon Bell:
+
+#####Meeting on 2/24 with Jon Bell:
+* Get familiar with all templates we have so far
+* Fixed problems of setting up devstack on our own laptops
+
+#####Meeting on 2/17 with Jon Bell:
+* Using VM to setup linux env. and Setup the devstack env.
+* Get familiar with Django
+* Get familiar with work that previously done by the other students
+
+#####Meeting on 2/11 with Jon Bell:
+* Setup schedule planning with mentor
+  * follow-up : decide to meet 2 times per week. one on weekdays and one on Sundays
+* Get Familiar with the detail of the project
+* Main task is to reconstruct the marketplace page
+
+
+=======
+
 #moc-gui
 Extending the MOC GUI
 
@@ -108,21 +131,3 @@ An alternative OpenStack Dashboard to Horizon for the MOC.
 
 * How can I test the OpenStack python API effeciently??
   * Look at UI/marketUI/auth.py. Use the defined keystone, glance and nova clients via python command line (first run 'source ~/devstack/openrc')
-
-<<<<<<< HEAD
-=======
-###Setup
-Set up devstack env : git clone https://github.com/openstack-dev/devstack
-
-####Meeting on 2/15 with Jon:
-* Using VM to setup linux env. and Setup the devstack env.
-* Get familiar with Django
-* Get familiar with work that previously done by the other students
-
-####Meeting on 2/11 with Jon:
-* Setup schedule planning with mentor
-	* follow-up : decide to meet 2 times per week. one on weekdays and one on Sundays
-* Get Familiar with the detail of the project
-* Main task is to reconstruct the marketplace page
-
->>>>>>> master
