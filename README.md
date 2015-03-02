@@ -1,7 +1,14 @@
 
 ###Meetings Briefs 
 
-#####Meeting on 2/29 with Jon Bell:
+#####Meeting on 3/3 with Jon Bell:
+
+
+#####Meeting on 3/1 with Jon Bell:
+* Fixed the bug with user registration
+* Fixed the contents is not responsding with clicking on siderbar on marketplace page
+* Be able to login as admin to UI
+* Discussed the demo on next Thursday
 
 #####Meeting on 2/24 with Jon Bell:
 * Get familiar with all templates we have so far
