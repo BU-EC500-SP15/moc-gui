@@ -2,10 +2,12 @@
 ###Meetings Briefs 
 
 #####Meeting on 3/3 with Jon Bell:
-
+* Fixed bugs with user registration
+* Added remove user from tenant button on the project page
+* Discussed future plans of the project
 
 #####Meeting on 3/1 with Jon Bell:
-* Fixed the bug with user registration
+* Fixed bugs with user registration
 * Fixed the contents is not responsding with clicking on siderbar on marketplace page
 * Be able to login as admin to UI
 * Discussed the demo on next Thursday
