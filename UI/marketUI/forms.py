@@ -14,6 +14,9 @@ class UserAddForm(forms.Form):
     userName = forms.CharField()
     roleName = forms.CharField()
 
+class UserDeleteForm(forms.Form):
+    userName = forms.CharField()
+
 class UserRemoveForm(forms.Form):
     userName = forms.CharField()
 

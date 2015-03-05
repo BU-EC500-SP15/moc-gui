@@ -36,7 +36,7 @@ def register(request):
                		email = form.cleaned_data['userEmail']
 			# Work around - login as admin keystone client for user creation
 			# then logged into new user from projects page arrival
-			api.joinTenant('admin', 'admin', 'demo')
+			api.joinTenant('admin', 'xuhang0507', 'demo')
 			# register user with keystone
 			api.registerUser(request.session['username'], request.session['password'], email)	
 			# login as new user
@@ -98,7 +98,7 @@ def createProject(request):
 			# work around for user to have project creation privileges
 			# for some reason, unable to create a project unless
 			# keystone client is passed a tenant_name arguement; can't create solely as user
-			api.joinTenant('admin', 'admin', 'demo')
+			api.joinTenant('admin', 'xuhang0507', 'demo')
 			# create project with current keystone session
 			api.createTenant(projectName, projectDesc)
 			# add user to new project with admin role
@@ -107,6 +107,17 @@ def createProject(request):
 	print ('Unable to create new Project')
 	return HttpResponseRedirect('/projects')
 
+def deleteUser(request, projectName):
+	"""
+	Add user to current project
+	"""
+	if request.method == "POST":
+		form = UserDeleteForm(request.POST)
+		if form.is_valid():
+			# recreate keystone client; keystone session work around
+			api.joinTenant('admin', 'xuhang0507', 'demo')
+			api.deleteUser(form.cleaned_data['userName'])
+        return HttpResponseRedirect('/project_space/manage/settings')
 
 ### Marketplace Page ###
 
@@ -122,6 +133,13 @@ def market(request):
 		{'name': 'HU-Storage','desc':'HU Storage', 'tag': 'storage', 'icon': 'http://openstack.org//themes/openstack/images/new-icons/openstack-object-storage-icon.png'} ]
 	return render(request, 'market.html', {'market': resources})
 
+###Project Management Page###
+
+def users(request):
+	api.joinTenant(request.session['username'], request.session['password'], request.session['tenant'])
+	tenant = api.getTenant(request.session['tenant'])
+	users = api.users()
+	return render(request, 'users.html',{'users': users})
 
 ###Project Management Page###
 
@@ -227,6 +245,8 @@ def addUser(request, projectName):
 			api.addUser(form.cleaned_data['userName'], form.cleaned_data['roleName'], projectName)
         return HttpResponseRedirect('/project_space/manage/settings')
 
+
+
 def editRole(request):
 	"""
 	Add role to selected user for current project
@@ -240,18 +260,6 @@ def editRole(request):
 				api.addRole(form.cleaned_data['userName'], form.cleaned_data['roleName'], request.session['tenant'])
 			elif form.cleaned_data['editAction'] == 'remove':
 				api.removeUserRole(form.cleaned_data['userName'], form.cleaned_data['roleName'], request.session['tenant'])
-        return HttpResponseRedirect('/project_space/manage/settings')
-
-def removeUser(request):
-	"""
-	Remove user from current project
-	"""
-	if request.method == "POST":
-		form = UserRemoveForm(request.POST)
-		if form.is_valid():
-			# recreate keystone client; keystone session work around
-			api.joinTenant(request.session['username'], request.session['password'], projectName)
-			api.removeUser(form.cleaned_data['userName'], form.cleaned_data['roleName'], projectName)
         return HttpResponseRedirect('/project_space/manage/settings')
 
 # Misc.

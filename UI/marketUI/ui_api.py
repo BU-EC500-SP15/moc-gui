@@ -190,6 +190,14 @@ def addUser(userName, roleName, tenantName):
 	tenant = [x for x in tenants if x.name==tenantName][0]
 	tenant.add_user(user, role)
 
+def deleteUser(userName):
+	"""
+	Adds a user to a tenant with specified role via keystone
+	"""
+	users = keystone.users.list()
+	user = [x for x in users if x.name==userName][0]
+	user.delete()
+
 def addRole(userName, roleName, tenantName):
 	"""
 	Adds a role to specified user in current tenant
@@ -219,6 +227,23 @@ def registerUser(userName, password, email):
 	Registers a new user with keystone
 	"""
 	keystone.users.create(userName, password=password, email=email)	
+
+def users():
+	"""
+	Create list of All the users in the system
+	"""
+        users = []
+        user_list = keystone.users.list()
+        for member in user_list:
+                roleNames = []
+                user = {
+                'name':member.name,
+                'id':member.id,
+                'enabled':member.enabled,
+                'email':member.email,
+                }
+                users.append(user)
+        return users
 
 def listUsers(tenant):
 	"""
