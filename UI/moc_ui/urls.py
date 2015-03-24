@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^dustVM', dustVM),
     url(r'^controlVM', controlVM),
 #    # marketplace
-#    url(r'^project_space/market', market),
+   url(r'^market', market),
 #    # project settings
 #    url(r'^project_space/manage/settings/deleteProject/(?P<projectName>.+)', deleteProject),
 #    url(r'^project_space/manage/settings/addUser/(?P<projectName>.+)', addUser),

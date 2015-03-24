@@ -40,6 +40,22 @@ def clouds(request):
                   {'project_list': project_list, 
                   'createProject': forms.createProject(), 'deleteProject': forms.deleteProject(), 
                   'createVM': forms.createVM(), 'deleteVM': forms.deleteVM(), 'controlVM': forms.controlVM(),})
+### Markets###
+def market(request):
+    # try:
+    #     markets = models.Market.object.filter(name = request.session['username'])
+    # except:
+    #     return HttpResponseRedirect('/')
+
+    market_list = []
+    # for market in markets:
+    #     market_choice_list = []
+    #     for choice in dicts.test_
+    for market in dicts.test_market_list:
+        market_list.append(market)
+
+    return render(request, 'market.html', 
+                  {'market_list': market_list})
 
 ### User Actions ### 
 def login(request): 

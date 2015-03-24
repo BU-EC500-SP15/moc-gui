@@ -28,3 +28,12 @@ test_vm_list_2 = [{'name': 'web server', 'state': '=)', 'provider': 'HU-prod', '
 test_project_list = [{'name': 'big_data', 'vm_list': test_vm_list_1}, 
                      {'name': 'webservers', 'vm_list': test_vm_list_2}]
 
+# MARKET PAGE
+test_service_list = [{'name': 'Hadoop', 'state': '=)', 'provider': 'HU-prod', 'image': 'centOS 7'},
+                ]
+                
+test_market_list = [{'name': 'Service','market_choice_list': test_service_list}, 
+                     {'name': 'Hive and Pig'}]
+
+
+
