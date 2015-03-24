@@ -42,8 +42,4 @@ test_market_list = [{'name':'Dell','provider':'Dell','description':'Dell Compute
                     {'name':'NetApp','provider':'NetApp','description':'NetApp Storage', 'version':'3.1.4', 'availability':'Yes', 'type':'Storage', 'image':'centOS 7'},
                     {'name':'Brocade','provider':'Brocade','description':'Brocade Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'centOS 7'},
                     {'name':'Juniper','provider':'Juniper','description':'Juniper Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'centOS 7'},
-                    {'name':'Cisco','provider':'Cisco','description':'Cisco Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'centOS 7'},
-                    {'name':'OpenShift','provider':'RedHat','description':'OpenShift PaaS', 'version':'1.0.0', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'},
-                    {'name':'Hadoop','provider':'Apache','description':'Apache Hadoop', 'version':'2.6.0', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'},
-                    {'name':'Load Balancer','provider':'LB','description':'Load Balancer', 'version':'3.1.4', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'},
-                    {'name':'PostgreSQL','provider':'Postgre','description':'PostgreSQL', 'version':'9.1', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'}]
+                    {'name':'Cisco','provider':'Cisco','description':'Cisco Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'centOS 7'}]
