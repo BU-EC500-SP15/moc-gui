@@ -4,7 +4,6 @@
 
     {% block title %}Marketplace{% endblock %}
 
-
 {% block content %}
 <div class="row vert-padded"></div>
 
@@ -12,11 +11,12 @@
     <div class="col-md-8 col-centered">
         <div class="panel-group" id="accordion">
             <div class="panel panel-default floating-block">
+
                 <div class="panel-heading">
                     <div class="panel-title">
                         <div class="row">
                             <h2 class="col-md-6 pull-left">  {{request.session.username}}'s <small>market</small></h2>
-                            <div class="col-md-4 btn-group pull-right" role="group">
+                            <!-- <div class="col-md-4 btn-group pull-right" role="group"> -->
                                 <!-- <button type='button' data-toggle="modal" data-target="#createProject" 
                                 class="btn btn-success" aria-label="Left">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Service
@@ -25,13 +25,196 @@
                                 class="btn btn-primary" aria-label="Left">
                                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                                 </button> -->
-                            </div>
+                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
-                {% for market in market_list %}
+
+                
                 <div class="panel-body">
+
                     <div class="row">
+                        <div class="col-md-3" style="padding: 0px">
+                            <h3>Marketplace</h3>
+
+                            <div class="sidebar">
+                                <ul class="sidebar-nav">
+                                	
+                                    
+                                 
+                                    <!-- <li class="sidebar-form">
+                                        <form class="form-inline">
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="Search the Market">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default btn-primary" aria-label:"leftalign">
+                                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </li> -->
+                                    <li><h4><a href = '#all'>All</a></h4></li>
+                                    <li><a href = '#apps'>Apps</a></li>
+                                    <li><a href = '#compute'>Compute</a></li>
+                                    <li><a href = '#network'>Network</a></li>
+                                    <li><a href = '#service'>Service</a></li>
+                                    <li><a href = '#storage'>Storage</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="col-md-9 content">
+                        
+                            <div class="row">
+                            	{% for market in market_list %}
+                                <div class="col-md-4 grid-item">
+                                 
+                                    <div class="image"></div>
+                                    	<br>
+                                    <h3><a href = ""><img src="/static/hadoop.jpg" alt="Hadoop" style="width:100px;height:100px"></a></h3>
+                                    <p>{{market.name}}</p>
+                                    <div class="dropdown">
+	                                    <div class="btn-group" role="group">
+	                                      <!--   <button type="button" class="btn btn-default btn-success" aria-label:"leftalign">
+	                                            <span class="glyphicon glyphicon-plus" id="dropdownMenu1" aria-hidden="true"></span>
+	                                        </button>
+	                                        <button type="button" class="btn btn-default btn-warning" aria-label:"leftalign">
+	                                            <span class="glyphicon glyphicon-star" id="dropdownMenu2" aria-hidden="true"></span>
+	                                        </button> -->
+	                                        <button id="item1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded = "false">
+	         
+	                                            More Info <span class="caret"></span>	
+	                                        </button>
+
+	                                       <ul class="dropdown-menu" role="menu">
+											    <li><a href="#">Action</a></li>
+    											<li><a href="#">Another action</a></li>
+   												<li><a href="#">Something else here</a></li>
+											    <li class="divider"></li>
+    											<li><a href="#">Separated link</a></li>
+											</ul>
+	                                    </div>
+                                   	</div>
+                                </div>
+                        		{% endfor %}
+                                <!-- <div class="col-md-4 grid-item" id="item2">
+                                    <div class="image"></div>
+                                    <br>
+                                    <h3>Item 2</h3>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default btn-danger" aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-warning" aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                        </button>
+                                        <button id="item2" type="button" class="btn btn-default btn-primary info-btn" 
+                                                aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 grid-item" id="item3">
+                                    <div class="image"></div>
+                                    <br>
+                                    <h3>Item 3</h3>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default btn-danger" aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-warning" aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                        </button>
+                                        <button id="item3" type="button" class="btn btn-default btn-primary info-btn" 
+                                                aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <br>
+                            <!-- <div class="row">
+                                <div id="item1info" class="info">
+                                    <h2>Item 1</h2>
+                                </div>
+                                <div id="item2info" class="info">
+                                    <h2>Item 2</h2>
+                                </div>
+                                <div id="item3info" class="info">
+                                    <h2>Item 3</h2>
+                                </div>
+                            </div> -->
+                            <!-- <div class="row">
+                                <div class="col-md-4 grid-item">
+                                    <div class="image"></div>
+                                    <br>
+                                    <h3>Item 4</h3>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default btn-success" aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-warning" aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button id="item4" type="button" class="btn btn-default btn-primary info-btn" 
+                                                aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 grid-item" id="item2">
+                                    <div class="image"></div>
+                                    <br>
+                                    <h3>Item 5</h3>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default btn-danger" aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-warning" aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                        </button>
+                                        <button id="item5" type="button" class="btn btn-default btn-primary info-btn" 
+                                                aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 grid-item" id="item3">
+                                    <div class="image"></div>
+                                    <br>
+                                    <h3>Item 6</h3>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default btn-danger" aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-warning" aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                        </button>
+                                        <button id="item6" type="button" class="btn btn-default btn-primary info-btn" 
+                                                aria-label:"leftalign">
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <br> -->
+                            <!-- <div class="row">
+                                <div id="item4info" class="info">
+                                    <h2>Item 4</h2>
+                                </div>
+                                <div id="item5info" class="info">
+                                    <h2>Item 5</h2>
+                                </div>
+                                <div id="item6info" class="info">
+                                    <h2>Item 6</h2>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>    
+                  <!--   <div class="row">
                         <div class="col-md-6 btn-group pull-left">
                             <button type="button" class="btn btn-default" data-toggle="collapse" 
                             data-parent="#accordian" data-target="#{{market.name}}">
@@ -49,9 +232,10 @@
                                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> cancel
                             </button>
                         </div>
-                    </div>
-                </div>
-                <div id="{{market.name}}" class="panel-collapse collapse">
+                    </div> -->
+                
+
+              <!--   <div id="{{market.name}}" class="panel-collapse collapse">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -93,15 +277,15 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                </div>
-                {% endfor %}
+                </div> -->
+                
                 <div class="panel-footer">
                 </div>
             </div>
+            
         </div>
     </div>
 
-    {% include "modals/createProject.html" %}
 
 </div>
 {% endblock %}
