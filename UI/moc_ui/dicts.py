@@ -35,9 +35,18 @@ test_project_list = [{'name': 'big_data', 'vm_list': test_vm_list_1},
 # test_applicance_list = [{'name': 'Hadoop', 'state': '=)', 'provider': 'HU-prod', 'image': 'centOS 7'},
 #                 ]
 
-test_market_list = [{'name': 'Hadoop','tag':'service','market_choice_list': "details"}, 
-                     {'name': 'Hive and Pig'},
-                     {'name': 'Another'}]
+test_market_list = [{'name':'Dell','provider':'Dell','description':'Dell Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
+                    {'name':'HP','provider':'HP','description':'HP Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
+                    {'name':'Intel','provider':'Intel','description':'Intel Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
+                    {'name':'EMC','provider':'EMC','description':'EMC Storage', 'version':'3.1.4', 'availability':'Yes', 'type':'Storage', 'image':'centOS 7'},
+                    {'name':'NetApp','provider':'NetApp','description':'NetApp Storage', 'version':'3.1.4', 'availability':'Yes', 'type':'Storage', 'image':'centOS 7'},
+                    {'name':'Brocade','provider':'Brocade','description':'Brocade Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'centOS 7'},
+                    {'name':'Juniper','provider':'Juniper','description':'Juniper Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'centOS 7'},
+                    {'name':'Cisco','provider':'Cisco','description':'Cisco Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'centOS 7'},
+                    {'name':'OpenShift','provider':'RedHat','description':'OpenShift PaaS', 'version':'1.0.0', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'},
+                    {'name':'Hadoop','provider':'Apache','description':'Apache Hadoop', 'version':'2.6.0', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'},
+                    {'name':'Load Balancer','provider':'LB','description':'Load Balancer', 'version':'3.1.4', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'},
+                    {'name':'PostgreSQL','provider':'Postgre','description':'PostgreSQL', 'version':'9.1', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'}]
 
 
 
