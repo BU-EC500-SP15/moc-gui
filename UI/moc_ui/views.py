@@ -56,6 +56,22 @@ def market(request):
 
     return render(request, 'market.html', 
                   {'market_list': market_list})
+### Users###
+def user(request):
+    # try:
+    #     markets = models.Market.object.filter(name = request.session['username'])
+    # except:
+    #     return HttpResponseRedirect('/')
+
+    user_list = []
+    # for market in markets:
+    #     market_choice_list = []
+    #     for choice in dicts.test_
+    for user in dicts.test_user_list:
+        user_list.append(user)
+
+    return render(request, 'user.html', 
+                  {'user_list': user_list})
 
 ### User Actions ### 
 def login(request): 
