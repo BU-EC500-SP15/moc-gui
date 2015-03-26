@@ -30,7 +30,6 @@ test_project_list = [{'name': 'big_data', 'vm_list': test_vm_list_1},
 
 # MARKET PAGE
 
-<<<<<<< HEAD
 
 test_market_list = [{'name':'Dell','img_url':'/static/Dell.png','provider':'Dell','description':'Dell Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
                     {'name':'HP','img_url':'/static/HP.png','provider':'HP','description':'HP Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
@@ -53,17 +52,3 @@ test_user_list = [{'name': 'Alex', 'role_list': "admin"},
                      {'name': 'Thomas', 'role_list': "admin"}]
 
 
-=======
-test_market_list = [{'name':'Dell','provider':'Dell','description':'Dell Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'Dell'},
-                    {'name':'HP','provider':'HP','description':'HP Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'HP'},
-                    {'name':'Intel','provider':'Intel','description':'Intel Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'Intel'},
-                    {'name':'EMC','provider':'EMC','description':'EMC Storage', 'version':'3.1.4', 'availability':'Yes', 'type':'Storage', 'image':'EMC'},
-                    {'name':'NetApp','provider':'NetApp','description':'NetApp Storage', 'version':'3.1.4', 'availability':'Yes', 'type':'Storage', 'image':'NetApp'},
-                    {'name':'Brocade','provider':'Brocade','description':'Brocade Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'Brocade'},
-                    {'name':'Juniper','provider':'Juniper','description':'Juniper Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'Juniper'},
-                    {'name':'Cisco','provider':'Cisco','description':'Cisco Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'Cisco'},
-                    {'name':'OpenShift','provider':'RedHat','description':'OpenShift PaaS', 'version':'1.0.0', 'availability':'Yes', 'type':'Application', 'image':'OpenShift'},
-                    {'name':'Hadoop','provider':'Apache','description':'Apache Hadoop', 'version':'2.6.0', 'availability':'Yes', 'type':'Application', 'image':'Hadoop'},
-                    {'name':'Load Balancer','provider':'LB','description':'Load Balancer', 'version':'3.1.4', 'availability':'Yes', 'type':'Application', 'image':'LB'},
-                    {'name':'PostgreSQL','provider':'Postgre','description':'PostgreSQL', 'version':'9.1', 'availability':'Yes', 'type':'Application', 'image':'Postgre'}]
->>>>>>> master
