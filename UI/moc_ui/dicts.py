@@ -30,10 +30,7 @@ test_project_list = [{'name': 'big_data', 'vm_list': test_vm_list_1},
 
 # MARKET PAGE
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 
 test_market_list = [{'name':'Dell','img_url':'/static/Dell.png','provider':'Dell','description':'Dell Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
                     {'name':'HP','img_url':'/static/HP.png','provider':'HP','description':'HP Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
@@ -55,7 +52,3 @@ test_user_list = [{'name': 'Alex', 'role_list': "admin"},
                      {'name': 'Lucas', 'role_list': "member"},
                      {'name': 'Thomas', 'role_list': "admin"}]
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
