@@ -16,8 +16,10 @@ urlpatterns = patterns('',
     # vm control 
     url(r'^dustVM', dustVM),
     url(r'^controlVM', controlVM),
-#    # marketplace
+    # marketplace
    url(r'^market', market),
+    # user
+   url(r'^user', user),
 #    # project settings
 #    url(r'^project_space/manage/settings/deleteProject/(?P<projectName>.+)', deleteProject),
 #    url(r'^project_space/manage/settings/addUser/(?P<projectName>.+)', addUser),

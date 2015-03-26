@@ -213,7 +213,7 @@ input, select, textarea{
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
-    background: #000;
+    background: #dddddd;
 }
 
 .sidebar-nav li a:active,
