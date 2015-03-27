@@ -50,5 +50,9 @@ test_user_list = [{'name': 'Alex', 'role_list': "admin"},
                      {'name': 'Bill', 'role_list': "member"},
                      {'name': 'Jon', 'role_list': "The Mentor"},
                      {'name': 'Lucas', 'role_list': "member"},
+<<<<<<< HEAD
                      {'name': 'Thomas', 'role_list': "admin, Member"}]
+=======
+                     {'name': 'Thomas', 'role_list': "admin"}]
+>>>>>>> master
 
