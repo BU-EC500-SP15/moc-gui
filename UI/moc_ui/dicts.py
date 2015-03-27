@@ -31,6 +31,7 @@ test_project_list = [{'name': 'big_data', 'vm_list': test_vm_list_1},
 # MARKET PAGE
 
 
+
 test_market_list = [{'name':'Dell','img_url':'/static/Dell.png','provider':'Dell','description':'Dell Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
                     {'name':'HP','img_url':'/static/HP.png','provider':'HP','description':'HP Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
                     {'name':'Intel','img_url':'/static/intel.png','provider':'Intel','description':'Intel Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
@@ -47,8 +48,7 @@ test_market_list = [{'name':'Dell','img_url':'/static/Dell.png','provider':'Dell
 # USER PAGE
 test_user_list = [{'name': 'Alex', 'role_list': "admin"}, 
                      {'name': 'Bill', 'role_list': "member"},
-                     {'name': 'Jon', 'role_list': "partner"},
+                     {'name': 'Jon', 'role_list': "The Mentor"},
                      {'name': 'Lucas', 'role_list': "member"},
-                     {'name': 'Thomas', 'role_list': "admin"}]
-
+                     {'name': 'Thomas', 'role_list': "admin, Member"}]
 
