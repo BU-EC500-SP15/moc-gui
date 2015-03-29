@@ -6,21 +6,25 @@
 <div class="row vert-padded"></div>
 
 <div class="container-fluid">
-    <div class="col-md-8 col-centered">
+    <div class="col-md-10 col-centered">
         <div class="panel-group" id="accordion">
             <div class="panel panel-default floating-block">
                 <div class="panel-heading">
                     <div class="panel-title">
                         <div class="row">
-                            <h2 class="col-md-6 pull-left">  {{request.session.username}}'s <small>cloud</small></h2>
-                            <div class="col-md-4 btn-group pull-right" role="group">
+                            <h2 class="col-md-7 pull-left">  {{request.session.username}}'s <small>cloud</small></h2>
+                            <div class="col-md-5 btn-group pull-right" role="group">
                                 <button type='button' data-toggle="modal" data-target="#createProject" 
                                 class="btn btn-success" aria-label="Left">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> project
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> MOC project
                                 </button>
-                                <button type='button' data-toggle="modal" data-target="#projectSettings" 
-                                class="btn btn-primary" aria-label="Left">
-                                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                <button type='button' data-toggle="modal" data-target="#createClusterAccount" 
+                                class="btn btn-info" aria-label="Left"> 
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> OS Account
+                                </button>
+                                <button type='button' data-toggle="modal" data-target="#deleteClusterAccount" 
+                                class="btn btn-danger" aria-label="Left"> 
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> OS Account
                                 </button>
                             </div>
                         </div>
@@ -29,26 +33,37 @@
                 {% for project in project_list %}
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-6 btn-group pull-left">
-                            <button type="button" class="btn btn-default" data-toggle="collapse" 
-                            data-parent="#accordian" data-target="#{{project.name}}">
-                                    <h4>{{project.name}}</h4>
-                            </button>
+                        <div class="col-md-7 pull-left">
+                                <h3>{{project.name}}</h3>
                         </div>
-                        <div class="col-md-4 btn-group pull-right" role="group">
-                            <button type="button" class="btn btn-success" aria-label="Left Align" action="#dustVM">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> vm
+                        <div class="col-md-5 btn-group pull-right" role="group">
+                            <button type="button" class="btn btn-default" data-toggle="collapse" 
+                            data-parent="#accordian" data-target="#{{project.name}}_vms">
+                                <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
                             </button>
-                            <button type="button" class="btn btn-primary" aria-label="Left Align" action="/clouds/">
+                            <button type="button" class="btn btn-info" data-toggle="collapse" 
+                            data-parent="#accordian" data-target="#{{project.name}}_info">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            </button>
+                            <a href="/market/{{project.name}}" class="btn btn-primary" 
+                            aria-label="Left Align"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                            <button type="button" data-toggle="modal" data-target="#createOSProject"
+                            class="btn btn-success" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning" data-toggle="collapse" 
+                            data-parent="#accordian" data-target="#{{project.name}}_settings">
                                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                             </button>
-                            <button type="button" class="btn btn-danger" aria-label="Left Align" action="#dustProject">
-                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> project
+                            <button type="button" data-toggle="modal" data-target="#deleteProject"
+                            class="btn btn-danger" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 
                             </button>
                         </div>
                     </div>
                 </div>
-                <div id="{{project.name}}" class="panel-collapse collapse">
+                <div id="{{project.name}}_vms" class="panel-collapse collapse">
+                    <h4>your machines</h4>
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -66,26 +81,52 @@
                                 <td>{{vm.state}}</td>
                                 <td>{{vm.image}}</td>
                                 <td>{{vm.provider}}</td>
-                                <td><div class="btn-group" role="group">
+                                <td>
+                                    <form action="/controlVM/" method="POST"><div class="btn-group" role="group">
+                                        {% csrf_token %}
                                         {% if vm.state == 'off' %}
-                                        <button type="button" class="btn btn-default btn-success" aria-label="Left Align">
+                                        <button name="action" value="start" type="submit" class="btn btn-success" aria-label="Left Align">
                                             <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
                                         </button>
                                         {% else %}
-                                        <button type="button" class="btn btn-default btn-warning" aria-label="Left Align">
+                                        <button name="action" value="stop" type="submit" class="btn btn-warning" aria-label="Left Align">
                                             <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
                                         </button>
                                         {% endif %}
-                                        <button type="button" class="btn btn-default btn-info" aria-label="Left Align">
+                                        <button name="action" value="VNC" type="submit" class="btn btn-info" aria-label="Left Align">
                                             <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
                                         </button>
-                                        <button type="button" class="btn btn-default btn-primary" aria-label="Left Align">
+                                        <button name="action" value="settings" type="submit" class="btn btn-primary" aria-label="Left Align">
                                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                                         </button>
-                                        <button type="button" class="btn btn-default btn-danger" aria-label="Left Align">
+                                        <button name="action" value="stop" type="submit" class="btn btn-danger" aria-label="Left Align">
                                             <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                                         </button>
-                                </div></td>
+                                    </form></div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div id="{{project.name}}_info" class="panel-collapse collapse">
+                    <h4>your usage</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td>name</td>
+                                <td>uptime</td>
+                                <td>% active</td>
+                                <td>% quota</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for vm in project.vm_list %}
+                            <tr>
+                                <td>{{vm.name}}</td>
+                                <td>300 days</td>
+                                <td>30%</td>
+                                <td>25%</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -98,7 +139,11 @@
         </div>
     </div>
 
-    {% include "modals/createProject.html" %}
+    {% for form_data in cloud_modals %}
+        {% include "modals/cloudModal.html" %}
+    {% endfor %}
+
+    {% include "modals/createVM.html" %}
 
 </div>
 {% endblock %}
