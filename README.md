@@ -1,6 +1,16 @@
 
 ###Meetings Briefs 
 
+#####Meeting on 3/31 with Jon Bell:
+
+
+
+#####Meetings before the Second Demo with Jon Bell:
+* Start using new UI created by our mentors
+* Start implementing the market place page
+* Burndown Trello cards and create new cards for future sprint
+
+
 #####Meeting on 3/3 with Jon Bell:
 * Fixed bugs with user registration
 * Added remove user from tenant button on the project page
