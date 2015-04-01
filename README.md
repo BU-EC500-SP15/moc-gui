@@ -1,16 +1,19 @@
-
 #moc-gui
 Extending the MOC GUI
 
 ###Meetings Briefs 
 
-#####Meeting on 3/31 with Jon Bell:
+#####Meeting on 4/2 with Jon Bell:
 
+
+#####Meeting on 3/31 with Jon Bell:
+* Starting making the market page in a generic way
+* Getting familiar with new view.py and models.py 
 
 
 #####Meetings before the Second Demo with Jon Bell:
 * Start using new UI created by our mentors
-* Start implementing the market place page
+* Start implementing the marketplace page
 * Burndown Trello cards and create new cards for future sprint
 
 
@@ -21,7 +24,7 @@ Extending the MOC GUI
 
 #####Meeting on 3/1 with Jon Bell:
 * Fixed bugs with user registration
-* Fixed the contents is not responsding with clicking on siderbar on marketplace page
+* Fixed the contents is not responding with clicking on sidebar on marketplace page
 * Be able to login as admin to UI
 * Discussed the demo on next Thursday
 
@@ -65,5 +68,5 @@ Extending the MOC GUI
 * Why does Django say port already in use when running server?
   * OpenStack may be using the port, either runserver first, or specify port (ie. python manage.py runserver 9999)
 
-* How can I test the OpenStack python API effeciently??
+* How can I test the OpenStack python API efficiently??
   * Look at UI/marketUI/auth.py. Use the defined keystone, glance and nova clients via python command line (first run 'source ~/devstack/openrc')
