@@ -50,7 +50,6 @@ class Cluster(models.Model):
 
 class ClusterAccount(models.Model):
     """A user account within an openstack cluster.
-
     Each of these belongs to a marketplace UI user. We store that user's
     openstack credentials in the database, including username/password.
     These are used by OSProject to obtain a token when necessary.
@@ -89,9 +88,7 @@ class OSProject(models.Model):
 
     def get_keystoneclient(self):
         """Get a keystone client object for the tenant.
-
         Returns the client object.
-
         This may raise ``keystone.exceptions.AuthorizationFailure`` if
         authorization fails for any reason, including stale tokens in
         the database.
@@ -141,7 +138,7 @@ class VM(models.Model):
     def __unicode__(self):
         return self.name
 
-class Service(models.Model)
+class Service(models.Model):
    """A service in the directory"""
    ui_project = models.ManyToManyField(UIProject)
 
@@ -150,6 +147,5 @@ class Service(models.Model)
    availability = models.CharField(max_length=DEFAULT_FIELD_LEN)
    description = models.CharField(max_length=DEFAULT_FIELD_LEN)
    logo_url = models.CharField(max_length=DEFAULT_FIELD_LEN)
-
-    def __unicode__(self):
-        return self.name
+    # def __unicode__(self):
+    #     return self.name
