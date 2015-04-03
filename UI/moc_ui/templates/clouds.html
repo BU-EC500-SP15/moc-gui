@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{request.session.username}}'s Cloud{% endblock %}
+{% block title %}{{request.session.user_name}}'s Cloud{% endblock %}
 
 {% block content %}
 <div class="row vert-padded"></div>
@@ -12,9 +12,9 @@
                 <div class="panel-heading">
                     <div class="panel-title">
                         <div class="row">
-                            <h2 class="col-md-7 pull-left">  {{request.session.username}}'s <small>cloud</small></h2>
+                            <h2 class="col-md-7 pull-left">  {{request.session.user_name}}'s <small>cloud</small></h2>
                             <div class="col-md-5 btn-group pull-right" role="group">
-                                <button type='button' data-toggle="modal" data-target="#createProject" 
+                                <button type='button' data-toggle="modal" data-target="#Create_UI_Project" 
                                 class="btn btn-success" aria-label="Left">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> MOC project
                                 </button>
@@ -45,8 +45,12 @@
                             data-parent="#accordian" data-target="#{{project.name}}_info">
                                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             </button>
-                            <a href="/market/{{project.name}}" class="btn btn-primary" 
-                            aria-label="Left Align"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                           <!--  <a href="/market/{{project.name}}" class="btn btn-primary" 
+                            aria-label="Left Align"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a> -->
+                            <button type="button" class="btn btn-primary" data-toggle="collapse" 
+                            data-parent="#accordian" data-target="#{{project.name}}_market">
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                            </button>
                             <button type="button" data-toggle="modal" data-target="#createOSProject"
                             class="btn btn-success" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -131,6 +135,11 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                </div>
+                <div id="{{project.name}}_market" class="panel-collapse collapse">
+                    <h4>your market</h4>
+                     <a href="/market/{{project.name}}" class="btn btn-primary" 
+                            aria-label="Left Align"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
                 </div>
                 {% endfor %}
                 <div class="panel-footer">
