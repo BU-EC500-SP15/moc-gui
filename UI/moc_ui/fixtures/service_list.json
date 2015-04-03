@@ -1,0 +1,24 @@
+[
+  {
+    "model": "moc_ui.service",
+    "pk": 1,
+    "fields": {
+      "name": "Red Hat",
+      "service_type": "Support",
+      "description" : "Linux Platform Support",
+      "logo_url":"/static/redhat-logo.jpg",
+      "availability":"True"
+    }
+  },
+  {
+    "model": "moc_ui.service",
+    "pk": 2,
+    "fields": {
+      "name": "Dell",
+      "service_type": "Compute",
+      "description" : "Dell Compute",
+      "logo_url":"/static/Dell.png",
+      "availability":"False"
+    }
+  }
+]

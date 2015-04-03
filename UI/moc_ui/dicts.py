@@ -1,3 +1,4 @@
+import forms
 ## SAMPLE
 sample_buttons = [{'name': 'NAME', 'type': 'BUTTON-TYPE', 'action': '/URL/', 'class': 'btn-primary'},]
 
@@ -15,6 +16,16 @@ reg_modal = {'id': 'createUser', 'action': '/register', 'method': 'post', 'title
 
 
 # CLOUDS PAGE
+cloud_modals = [{'id': 'Create_UI_Project', 'action': '/Create/UI_Project', 'title': 'Create Project', 'form': forms.Create_UI_Project()},
+                 {'id': 'Delete_UI_Project', 'action': '/Delete/Project', 'title': 'Delete Project', 'form': forms.Delete_UI_Project()},
+                 {'id': 'Create_Cluster_Account', 'action': '/Create/Cluster_Account', 'title': 'Add Cluster Account', 'form': forms.Create_Cluster_Account()},
+                 {'id': 'Delete_Cluster_Account', 'action': '/Delete/Cluster_Account', 'title': 'Delete Cluster Account', 'form': forms.Delete_Cluster_Account()},
+                 {'id': 'Create_Cluster_Project', 'action': '/create/OSProject', 'title': 'Add Cluster Project', 'form': forms.Create_Cluster_Project()},
+                 {'id': 'deleteOSProject', 'action': '/deleteOSProject', 'title': 'Delete Cluster Project', 'form': forms.Delete_Cluster_Project()},
+                 #{'id': 'createVM', 'title': 'Create VM', 'form': forms.create_VM()},
+                 {'id': 'deleteVM', 'action': '/deleteCluster', 'title': 'Delete VM', 'form': forms.Delete_VM()},]
+
+
 test_vm_list_1 = [{'name': 'hadoop master', 'state': '=)', 'provider': 'HU-prod', 'image': 'centOS 7'},
                 {'name': 'hadoop slave 1', 'state': '=)', 'provider': 'BU-prod', 'image': 'centOS 7'},
                 {'name': 'hadoop slave 2', 'state': '=)', 'provider': 'NE-prod', 'image': 'centOS 7'},
@@ -32,7 +43,7 @@ test_project_list = [{'name': 'big_data', 'vm_list': test_vm_list_1},
 # MARKET PAGE
 
 test_market_list = [
-                    {'name':'Red Hat','img_url':'/static/redhat.jpg','provider':'redhat','description':'PostgreSQL', 'version':'9.1', 'availability':'Yes', 'type':'Support', 'image':'centOS 7'},
+                    {'name':'Red Hat','img_url':'/static/redhat-logo.png','provider':'redhat','description':'PostgreSQL', 'version':'9.1', 'availability':'Yes', 'type':'Support', 'image':'centOS 7'},
                     {'name':'Dell','img_url':'/static/Dell.png','provider':'Dell','description':'Dell Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
                     {'name':'Lenovo','img_url':'/static/lenovo-logo.jpg','provider':'Lenovo','description':'Lenovo Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
                     #{'name':'HP','img_url':'/static/HP.png','provider':'HP','description':'HP Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
@@ -41,9 +52,9 @@ test_market_list = [
                     {'name':'Fujitsu','img_url':'/static/fujitsu-logo.jpg','provider':'Fujitsu','description':'Fujitsu Storage', 'version':'3.1.4', 'availability':'Yes', 'type':'Storage', 'image':'centOS 7'},
                     {'name':'EMC','img_url':'/static/EMC.jpg','provider':'EMC','description':'EMC Storage', 'version':'3.1.4', 'availability':'Yes', 'type':'Storage', 'image':'centOS 7'},
                     {'name':'Juniper','img_url':'/static/Juniper.png','provider':'Juniper','description':'Juniper Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'centOS 7'},
-                    {'name':'Cisco','img_url':'/static/Cisco.jpg','provider':'Cisco','description':'Cisco Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'centOS 7'},
+                    {'name':'Cisco','img_url':'/static/Cisco.jpeg','provider':'Cisco','description':'Cisco Networking', 'version':'3.1.4', 'availability':'Yes', 'type':'Network', 'image':'centOS 7'},
                     #{'name':'OpenShift','img_url':'/static/OpenShift.jpg','provider':'RedHat','description':'OpenShift PaaS', 'version':'1.0.0', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'},
-                    {'name':'Hadoop','img_url':'/static/Hadoop.jpg','provider':'Apache','description':'Apache Hadoop', 'version':'2.6.0', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'},
+                    {'name':'Hadoop','img_url':'/static/hadoop.jpg','provider':'Apache','description':'Apache Hadoop', 'version':'2.6.0', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'},
                     {'name':'NetApp','img_url':'/static/Netapp.png','provider':'NetApp','description':'NetApp Storage', 'version':'3.1.4', 'availability':'Yes', 'type':'Storage', 'image':'centOS 7'},
                     {'name':'PostgreSQL','img_url':'/static/Postgre.jpg','provider':'Postgre','description':'PostgreSQL', 'version':'9.1', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'}]
 
