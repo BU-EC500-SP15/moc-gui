@@ -27,8 +27,8 @@
     "pk": 3,
     "fields": {
       "name": "Lenovo",
-      "service_type": "Lenovo Compute",
-      "description" : "Dell Compute",
+      "service_type": "Compute",
+      "description" : "Lenovo  Compute",
       "logo_url":"/static/lenovo-logo.jpg",
       "availability":"True"
     }
