@@ -50,7 +50,9 @@ def clouds(request):
 
     return render(request, 'clouds.html', {'project_list': project_list, 'cloud_modals': dicts.cloud_modals, 'createVMform': createVMform })
 
-def market(request, project):
+def market(request, project, f_text = ''):
+    print(f_text)
+    f = lambda x: True
     market_list = []
     # for market in markets:
     #     market_choice_list = []
@@ -59,6 +61,13 @@ def market(request, project):
     # for market in dicts.test_market_list:
     #     market_list.append(market)
     market_list = Service.objects.all()
+
+    #Filter Results!
+
+    if (f_text != 'all'):
+        f = lambda x: x.get_type() == f_text
+
+    market_list = filter(f, market_list)
 
     return render(request, 'market.html', 
             {'project': project, 'market_list': market_list})

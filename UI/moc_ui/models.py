@@ -44,6 +44,9 @@ class Service(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_type(self):
+        return self.service_type
+
 # Cluster information
 class Cluster(models.Model):
     """An openstack cluster."""
