@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # marketplace
     url(r'^market/(?P<project>.+)/$', market),
     # sidebar
-    #url(r'^market/(?P<project>.+)/(\#)(?P<f_text>.+)', market)
+    url(r'^market/(?P<project>.+)/(?P<ftext>.+)$', market)
 )
 ##Form Processing
 urlpatterns += patterns('',
