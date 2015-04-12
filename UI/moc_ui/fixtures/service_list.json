@@ -115,7 +115,7 @@
     "pk": 11,
     "fields": {
       "name": "Hadoop",
-      "service_type": "Application",
+      "service_type": "Service",
       "description" : "Apache Hadoop",
       "logo_url":"/static/hadoop.jpg",
       "availability":"True"

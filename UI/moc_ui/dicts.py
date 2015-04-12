@@ -41,7 +41,7 @@ test_project_list = [{'name': 'big_data', 'vm_list': test_vm_list_1},
 
 
 # MARKET PAGE
-
+'''
 test_market_list = [
                     {'name':'Red Hat','img_url':'/static/redhat-logo.png','provider':'redhat','description':'PostgreSQL', 'version':'9.1', 'availability':'Yes', 'type':'Support', 'image':'centOS 7'},
                     {'name':'Dell','img_url':'/static/Dell.png','provider':'Dell','description':'Dell Compute', 'version':'3.1.4', 'availability':'Yes', 'type':'Compute', 'image':'centOS 7'},
@@ -57,6 +57,7 @@ test_market_list = [
                     {'name':'Hadoop','img_url':'/static/hadoop.jpg','provider':'Apache','description':'Apache Hadoop', 'version':'2.6.0', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'},
                     {'name':'NetApp','img_url':'/static/Netapp.png','provider':'NetApp','description':'NetApp Storage', 'version':'3.1.4', 'availability':'Yes', 'type':'Storage', 'image':'centOS 7'},
                     {'name':'PostgreSQL','img_url':'/static/Postgre.jpg','provider':'Postgre','description':'PostgreSQL', 'version':'9.1', 'availability':'Yes', 'type':'Application', 'image':'centOS 7'}]
+'''
 
 # USER PAGE
 test_user_list = [{'name': 'Alex', 'role_list': "admin"}, 

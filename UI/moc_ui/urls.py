@@ -9,7 +9,9 @@ urlpatterns = patterns('',
     # cloud splash
     url(r'^clouds', clouds),
     # marketplace
-    url(r'^market/(?P<project>.+)', market),
+    url(r'^market/(?P<project>.+)/$', market),
+    # sidebar
+    url(r'^market/(?P<project>.+)/(?P<ftext>.+)$', market)
 )
 ##Form Processing
 urlpatterns += patterns('',
