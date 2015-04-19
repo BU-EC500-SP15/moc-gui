@@ -1,1 +1,0 @@
-UI/static/.DS_Store
