@@ -10,8 +10,8 @@ urlpatterns = patterns('',
     url(r'^clouds', clouds),
     # marketplace
     url(r'^market/(?P<project>.+)/$', market),
-    # sidebar
-    url(r'^market/(?P<project>.+)/(?P<ftext>.+)$', market)
+    # # sidebar
+    url(r'^market/(?P<project>.+)/(?P<ftext>.+)$', market),
 )
 ##Form Processing
 urlpatterns += patterns('',
@@ -20,8 +20,8 @@ urlpatterns += patterns('',
     url(r'^register', register),
     url(r'^logout', logout),
     ## DB dusting
-    url(r'^Create/(?P<object_class>.+)', Create_Object),
-    url(r'^Delete/(?P<object_class>.+)', Delete_Object),
+    url(r'^create/(?P<object_class>.+)', create_object),
+    url(r'^delete/(?P<object_class>.+)', delete_object),
     # projects control
 #    url(r'^createProject', createProject),
 #    url(r'^deleteProject', deleteProject),

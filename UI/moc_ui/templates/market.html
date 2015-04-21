@@ -50,25 +50,25 @@
                         </div>
                         <div class="col-md-9 content">                      
                             <div class="row">
-                            	{% for market in market_list %}
+                                {% for market in market_list %}
                                 <div class="col-md-4 grid-item">
                                 <br>                                 
                                     <div class="image"></div>
-                                    <p>{{market.name}}</p>	
+                                    <p>{{market.name}}</p>  
                                     <h3><a href = ""><img src={{market.logo_url}} alt="Hadoop" style="width:100px;height:100px"></a></h3>                                  
                                     <div class="dropdown">
-	                                    <div class="btn-group" role="group">
-	                                        <button type="button" class="btn btn-default btn-success glyphicon glyphicon-plus" aria-label:"leftalign">
-	                                            <!-- <span class = "glyphicon glyphicon-plus"  id="dropdownMenu1" aria-hidden="true"></span> -->
-	                                        </button>
-	                                        <button type="button" class="btn btn-default btn-warning glyphicon glyphicon-star" aria-label:"leftalign">
-	                                            <!-- <span class = "glyphicon glyphicon-star" id="dropdownMenu2" aria-hidden="true"></span> -->
-	                                        </button>
-	                                        <button  type="button" class="btn btn-primary dropdown-toggle glyphicon glyphicon-info-sign" data-toggle="dropdown" aria-hidden="false" >
-	                                            <!-- <span class="caret glyphicon glyphicon-info-sign" id="dropdownMenu3" aria-hidden="true"></span>	 -->
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-default btn-success glyphicon glyphicon-plus" aria-label:"leftalign">
+                                                <!-- <span class = "glyphicon glyphicon-plus"  id="dropdownMenu1" aria-hidden="true"></span> -->
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-warning glyphicon glyphicon-star" aria-label:"leftalign">
+                                                <!-- <span class = "glyphicon glyphicon-star" id="dropdownMenu2" aria-hidden="true"></span> -->
+                                            </button>
+                                            <button  type="button" class="btn btn-primary dropdown-toggle glyphicon glyphicon-info-sign" data-toggle="dropdown" aria-hidden="false" >
+                                                <!-- <span class="caret glyphicon glyphicon-info-sign" id="dropdownMenu3" aria-hidden="true"></span>     -->
                                                 <span class="caret"></span>
                                                 <!-- <span class="sr-only"></span> -->
-	                                        </button>
+                                            </button>
                                             <ul class="dropdown-menu" role="menu">
                                             <li><a href="#">Action</a></li>
                                             <li><a href="#">Another action</a></li>
@@ -76,10 +76,10 @@
                                             <li class="divider"></li>
                                             <li><a href="#">Separated link</a></li>
                                           </ul>            
-	                                    </div>
-                                   	</div>
+                                        </div>
+                                    </div>
                                 </div>
-                        		{% endfor %}
+                                {% endfor %}
                         </div>
                     </div>
                 </div>    
