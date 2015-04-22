@@ -9,9 +9,15 @@ urlpatterns = patterns('',
     # cloud splash
     url(r'^clouds', clouds),
     # marketplace
-    url(r'^market/(?P<project>.+)/$', market),
-    # # sidebar
-    url(r'^market/(?P<project>.+)/(?P<ftext>.+)$', market),
+    # Add & Remove are placeholders at the moment. I think we shouldn't have in particular add and remove, but a
+    # Sort of toggle function. Like toggle_service and toggle_default. Just add and remove in the regex with whatever
+    # function name you want to pass to the view. 
+    url(r'^(?!.+add\/?$|.+remove\/?$)market\/(?P<project>.+)?\/$', market),
+    # Market Place filtering functionality:
+    #url(r'^market\/(?P<project>.+)\/(?P<filter>.+)\/?$', market),
+    url(r'^(?!.+add\/?$|.+remove\/?$)market\/(?P<project>.+)?\/(?P<filter>.+)\/?$', market),
+    # Tells the view to perform an action on a service. 
+    url(r'^market\/(?P<project>.+)\/(?P<service>.+)\/(?P<action>.+)\/?$', market),
 )
 ##Form Processing
 urlpatterns += patterns('',

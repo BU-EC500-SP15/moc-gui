@@ -63,27 +63,17 @@ def clouds(request):
                    'cloud_modals': html.cloud_modals(request), 
                    'createVMform': createVMform })
 
-def market(request, project, ftext = 'all'):
-    print(ftext)
-    f = lambda x: True
-    market_list = []
-    # for market in markets:
-    #     market_choice_list = []
-    #     for choice in dicts.test_
+def market(request, project, filter = 'all', service = '', action = ''):
+    if service != '' and action != '':
+        # Put functionality for toggling services here!
 
-    # for market in dicts.test_market_list:
-    #     market_list.append(market)
-    market_list = Service.objects.all()
-
-    #Filter Results!
-
-    if (ftext != 'all'):
-        f = lambda x: x.service_type == ftext
-
-    market_list = filter(f, market_list)
-
-    return render(request, 'market.html', 
-            {'project': project, 'market_list': market_list})
+        # print 'action engage servise'
+        # print 'Args:\n project: ' + project + ' filter: ' + filter + ' servise: ' + service + ' action: ' + action 
+        
+        # Return to the marketplace after performing an action. 
+        return HttpResponseRedirect('/market/' + project + '/')
+    market_list = [x for x in Service.objects.all() if x.service_type == filter or filter == 'all']
+    return render(request, 'market.html', {'project': project, 'market_list': market_list})
 
 ################
 ## FORM VIEWS ##
