@@ -125,6 +125,7 @@ def market(request, project, filter = 'all', service = '', action = ''):
 
 
     if service != '' and action != '':
+        print('hit')
         if action == 'toggle_active':
             if toggle_active (project, service):
                 print('t_a_s')
@@ -139,9 +140,13 @@ def market(request, project, filter = 'all', service = '', action = ''):
         
         # Return to the marketplace after performing an action. 
         return HttpResponseRedirect('/market/' + project + '/')
-    market_list = [x for x in Service.objects.all() if x.service_type == filter or filter == 'all']
+    market_list = [x.__dict__ for x in Service.objects.all() if x.service_type == filter or filter == 'all']
+    for x in market_list:
+        cs = check_status(x['name'], project)
+        x['act'] = cs[0]
+        x['dea'] = cs[1]
 
-    return render(request, 'market.html', {'project': project, 'market_list': market_list, 'check_status': check_status})
+    return render(request, 'market.html', {'project': project, 'market_list': market_list})
 
 ################
 ## FORM VIEWS ##

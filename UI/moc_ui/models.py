@@ -49,6 +49,16 @@ class Service(models.Model):
     
     def __unicode__(self):
         return self.name
+'''
+    def __dict___(self):
+        return {
+        'name': self.name,
+        'service_type': self.service_type,
+        'description': self.description,
+        'logo_url': self.logo_url,
+        'availability': self.availability
+        }
+'''
 
 # Cluster information
 class Cluster(models.Model):
