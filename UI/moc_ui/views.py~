@@ -71,7 +71,7 @@ def market(request, project, filter = 'all', service = '', action = ''):
 	    #adding a service:
             models.objects.service_list.add(service)       #add to M2M relation
         
-        elif action == 'remove':
+        else if action == 'remove':
 
         #removing a service:
             models.objects.service_list.remove(service)    #remove from M2M relation

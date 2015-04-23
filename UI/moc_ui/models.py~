@@ -97,10 +97,10 @@ class UIProject(models.Model):
     users = models.ManyToManyField(User)
 
     ## Service Defaults
-    default_list = models.ManyToManyField(Service, related_name = 'default_service') 
+    default_list = models.ManyToManyField(Service) 
 
     ## Registered Service Options
-    service_list = models.ManyToManyField(Service, related_name = 'chosen_service')
+    service_list = models.ManyToManyField(Service)
 
     def __unicode__(self):
         return self.name
