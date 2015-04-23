@@ -12,12 +12,12 @@ urlpatterns = patterns('',
     # Add & Remove are placeholders at the moment. I think we shouldn't have in particular add and remove, but a
     # Sort of toggle function. Like toggle_service and toggle_default. Just add and remove in the regex with whatever
     # function name you want to pass to the view. 
-    url(r'^(?!.+add\/?$|.+remove\/?$)market\/(?P<project>.+)?\/$', market),
+    url(r'^(?!.+toggle_active\/?$|.+toggle_default\/?$)market\/(?P<project>.+)?\/$', market),
     # Market Place filtering functionality:
     #url(r'^market\/(?P<project>.+)\/(?P<filter>.+)\/?$', market),
-    url(r'^(?!.+add\/?$|.+remove\/?$)market\/(?P<project>.+)?\/(?P<filter>.+)\/?$', market),
+    url(r'^(?!.+toggle_active\/?$|.+toggle_default\/?$)market\/(?P<project>.+)?\/(?P<filter>.+)\/?$', market),
     # Tells the view to perform an action on a service. 
-    url(r'^market\/(?P<project>.+)\/(?P<service>.+)\/(?P<action>.+)\/?$', market),
+    url(r'^market\/(?P<project>.+)\/(?P<service>.+)\/(?P<action>toggle_active|toggle_default)\/?$', market),
 )
 ##Form Processing
 urlpatterns += patterns('',

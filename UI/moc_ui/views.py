@@ -79,7 +79,7 @@ def market(request, project, filter = 'all', service = '', action = ''):
         if len(search) > 0:
             search[0].delete()
         else:
-            uipr_serv = models.UIProject_service_list (service = service[0], project = project[0])
+            uipr_serv = models.UIProject_service_list (service = service[0], project = project[0], type = 'NOR')
             uipr_serv.save()
         return True
 
@@ -93,21 +93,46 @@ def market(request, project, filter = 'all', service = '', action = ''):
             return False
 
         # Checks if the relation already exist
-        search = models.UIProject_service_list.filter(project = project, service = service)
+        # Toggles the state of the relationship
+        search = models.UIProject_service_list.objects.filter(project = project, service = service)
         if len(search) > 0:
             if search[0].type == 'NOR':
                 search[0].type = 'DEA'
             else:
                 search[0].type = 'NOR'
+            search[0].save()
         else:
             uipr_serv = models.UIProject_service_list (service = service[0], project = project[0], type = 'DEA')
             uipr_serv.save()
         return True
 
-    if service != '' and action != '':
-        toggle_active (project, service)
+    def check_status (service, project = project):
+        #Get the models of the queried objects:
+        project = UIProject.objects.filter(name = project)
+        service = Service.objects.filter(name = service)
+        
+        # Fails if a project or service does not exist, return an error. 
+        if len(project) == 0 or len(service) == 0:
+            return (False, False, 'Failure')
 
-        # Put functionality for toggling services here!
+        search = models.UIProject_service_list.objects.filter(project = project, service = service)
+        if len(search) == 0:
+            return (False, False)
+        elif len(search) > 0 and search[0].type == 'NOR':
+            return (True, False)
+        else:
+            return (True, True)
+
+
+    if service != '' and action != '':
+        if action == 'toggle_active':
+            if toggle_active (project, service):
+                print('t_a_s')
+        else:
+            if toggle_default (project, service):
+                print ('t_d_s')
+        print(models.UIProject_service_list.objects.all())
+        print(check_status(service, project))
 
         # print 'action engage servise'
         # print 'Args:\n project: ' + project + ' filter: ' + filter + ' servise: ' + service + ' action: ' + action 
@@ -115,7 +140,8 @@ def market(request, project, filter = 'all', service = '', action = ''):
         # Return to the marketplace after performing an action. 
         return HttpResponseRedirect('/market/' + project + '/')
     market_list = [x for x in Service.objects.all() if x.service_type == filter or filter == 'all']
-    return render(request, 'market.html', {'project': project, 'market_list': market_list})
+
+    return render(request, 'market.html', {'project': project, 'market_list': market_list, 'check_status': check_status})
 
 ################
 ## FORM VIEWS ##

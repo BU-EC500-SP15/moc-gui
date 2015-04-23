@@ -112,7 +112,7 @@ class UIProject_service_list(models.Model):
     type = models.CharField(max_length=DEFAULT_FIELD_LEN, choices=TYPE_CHOICES,  default='normal')
 
     def __unicode__(self):
-        return self.project.name + ' :P / S: ' + self.service.name
+        return 'Project Name: ' + self.project.name + ' Servise Name: ' + self.service.name + ' Type: ' + self.type
 
 
 
