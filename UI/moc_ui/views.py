@@ -14,6 +14,7 @@ import query_helpers as helpers
 # render modal / button / table templates
 import html_helpers as html
 from models import Service
+from models import UIProject
 
 
 ####################
@@ -64,7 +65,48 @@ def clouds(request):
                    'createVMform': createVMform })
 
 def market(request, project, filter = 'all', service = '', action = ''):
+    def toggle_active (project, service):
+        #Get the models of the queried objects:
+        project = UIProject.objects.filter(name = project)
+        service = Service.objects.filter(name = service)
+
+        # Fails if a project or service does not exist, return an error. 
+        if len(project) == 0 or len(service) == 0:
+            return False
+
+        # Checks if the relation already exist
+        search = models.UIProject_service_list.objects.filter(project = project, service = service)
+        if len(search) > 0:
+            search[0].delete()
+        else:
+            uipr_serv = models.UIProject_service_list (service = service[0], project = project[0])
+            uipr_serv.save()
+        return True
+
+    def toggle_default (project, service):
+        #Get the models of the queried objects:
+        project = UIProject.objects.filter(name = project)
+        service = Service.objects.filter(name = service)
+
+        # Fails if a project or service does not exist, return an error. 
+        if len(project) == 0 or len(service) == 0:
+            return False
+
+        # Checks if the relation already exist
+        search = models.UIProject_service_list.filter(project = project, service = service)
+        if len(search) > 0:
+            if search[0].type == 'NOR':
+                search[0].type = 'DEA'
+            else:
+                search[0].type = 'NOR'
+        else:
+            uipr_serv = models.UIProject_service_list (service = service[0], project = project[0], type = 'DEA')
+            uipr_serv.save()
+        return True
+
     if service != '' and action != '':
+        toggle_active (project, service)
+
         # Put functionality for toggling services here!
 
         # print 'action engage servise'

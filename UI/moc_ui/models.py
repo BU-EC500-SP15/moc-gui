@@ -99,10 +99,22 @@ class UIProject(models.Model):
     ## Service Defaults 
 
     ## Registered Service Options
-    service_list = models.ManyToManyField(Service)
+    service_list = models.ManyToManyField(Service, through = 'UIProject_service_list')
 
     def __unicode__(self):
         return self.name
+
+# Defining the relation.
+class UIProject_service_list(models.Model):
+    TYPE_CHOICES = (('NOR','normal'), ('DEA', 'default'))
+    project = models.ForeignKey(UIProject)
+    service = models.ForeignKey(Service)
+    type = models.CharField(max_length=DEFAULT_FIELD_LEN, choices=TYPE_CHOICES,  default='normal')
+
+    def __unicode__(self):
+        return self.project.name + ' :P / S: ' + self.service.name
+
+
 
 class ClusterProject(models.Model):
     """An openstack project that a user has access to.
