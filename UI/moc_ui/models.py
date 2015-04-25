@@ -49,6 +49,16 @@ class Service(models.Model):
     
     def __unicode__(self):
         return self.name
+'''
+    def __dict___(self):
+        return {
+        'name': self.name,
+        'service_type': self.service_type,
+        'description': self.description,
+        'logo_url': self.logo_url,
+        'availability': self.availability
+        }
+'''
 
 # Cluster information
 class Cluster(models.Model):
@@ -99,10 +109,22 @@ class UIProject(models.Model):
     ## Service Defaults 
 
     ## Registered Service Options
-    service_list = models.ManyToManyField(Service)
+    service_list = models.ManyToManyField(Service, through = 'UIProject_service_list')
 
     def __unicode__(self):
         return self.name
+
+# Defining the relation.
+class UIProject_service_list(models.Model):
+    TYPE_CHOICES = (('NOR','normal'), ('DEA', 'default'))
+    project = models.ForeignKey(UIProject)
+    service = models.ForeignKey(Service)
+    type = models.CharField(max_length=DEFAULT_FIELD_LEN, choices=TYPE_CHOICES,  default='normal')
+
+    def __unicode__(self):
+        return 'Project Name: ' + self.project.name + ' Servise Name: ' + self.service.name + ' Type: ' + self.type
+
+
 
 class ClusterProject(models.Model):
     """An openstack project that a user has access to.

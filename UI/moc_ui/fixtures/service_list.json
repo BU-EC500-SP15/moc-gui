@@ -142,5 +142,19 @@
       "logo_url":"/static/Postgre.jpg",
       "availability":"True"
     }
-	}
+	},
+  {
+    "model": "moc_ui.uiproject",
+    "pk": 1,
+    "fields": {
+      "name": "big_data"
+    }
+  },
+  {
+    "model": "moc_ui.uiproject",
+    "pk": 2,
+    "fields": {
+      "name": "webservers"
+    }
+  }
 ]

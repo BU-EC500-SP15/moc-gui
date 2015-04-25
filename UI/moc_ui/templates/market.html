@@ -11,7 +11,6 @@
     <div class="col-md-8 col-centered">
         <div class="panel-group" id="accordion">
             <div class="panel panel-default floating-block">
-
                 <div class="panel-heading">
                     <div class="panel-title">
                         <div class="row">
@@ -32,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                </div>              
+                </div>       
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3" style="padding: 0px">
@@ -55,15 +54,29 @@
                                 <br>                                 
                                     <div class="image"></div>
                                     <p>{{market.name}}</p>  
-                                    <h3><a href = ""><img src={{market.logo_url}} alt="Hadoop" style="width:100px;height:100px"></a></h3>                                  
+                                    <h3><a href = ""><img src={{market.logo_url}} alt={{market.name}} style="width:100px;height:100px"></a></h3>                                  
                                     <div class="dropdown">
                                         <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-default btn-success glyphicon glyphicon-plus" aria-label:"leftalign">
-                                                <!-- <span class = "glyphicon glyphicon-plus"  id="dropdownMenu1" aria-hidden="true"></span> -->
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-warning glyphicon glyphicon-star" aria-label:"leftalign">
-                                                <!-- <span class = "glyphicon glyphicon-star" id="dropdownMenu2" aria-hidden="true"></span> -->
-                                            </button>
+                                            {% if not market.act %}
+                                            <a href= "/market/{{project}}/{{market.name}}/toggle_active" class="btn btn-default btn-success" aria-label:"leftalign">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            </a>
+                                            {% endif %}
+                                            {% if market.act %}
+                                            <a href= "/market/{{project}}/{{market.name}}/toggle_active" class="btn btn-default btn-danger" aria-label:"leftalign">
+                                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                            </a>
+                                            {% endif %}
+                                            {% if market.dea %}
+                                            <a href= "/market/{{project}}/{{market.name}}/toggle_default" class="btn btn-default btn-warning" aria-label:"leftalign">
+                                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                            </a>
+                                            {% endif %}
+                                            {% if not market.dea %}
+                                            <a href= "/market/{{project}}/{{market.name}}/toggle_default" class="btn btn-default btn-warning" aria-label:"leftalign">
+                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                            </a>
+                                            {% endif %}
                                             <button  type="button" class="btn btn-primary dropdown-toggle glyphicon glyphicon-info-sign" data-toggle="dropdown" aria-hidden="false" >
                                                 <!-- <span class="caret glyphicon glyphicon-info-sign" id="dropdownMenu3" aria-hidden="true"></span>     -->
                                                 <span class="caret"></span>

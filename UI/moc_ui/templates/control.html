@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}{{request.session.user_name}}'s Clouds{% endblock %}
+{% block title %}Control Panel{% endblock %}
 
 {% block content %}
+{% for project in project%}
 <div class="row vert-padded"></div>
 
 <div class="container-fluid">
@@ -12,12 +13,11 @@
                 <div class="panel-heading">
                     <div class="panel-title">
                         <div class="row">
-                            <h2 class="col-md-7 pull-left">  {{request.session.user_name}}'s <small>project</small></h2>
+                   
+                            <h2 class="col-md-7 pull-left">  {{project}}'s <small>control panel</small></h2>
+                        
                             <div class="col-md-5 btn-group pull-right" role="group">
-                                <button type='button' data-toggle="modal" data-target="#create_UI_Project" 
-                                class="btn btn-success" aria-label="Left">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> OCX project
-                                </button>
+                                
                                 <!--
                                 <button type='button' data-toggle="modal" data-target="#createClusterAccount" 
                                 class="btn btn-info" aria-label="Left"> 
@@ -32,39 +32,28 @@
                         </div>
                     </div>
                 </div>
-                {% for project in project_list %}
+                
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-7 pull-left">
-                                <h3>{{project.name}}</h3>
+                                <h3>{{project}}'s marketplace</h3>
+
                         </div>
-                        <a href="/control/{{project.name}}" class="btn btn-primary" 
-                            aria-label="Left Align"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span></a>
-                        <!-- <div class="col-md-5 btn-group pull-right" role="group">
-                            <button type="button" class="btn btn-default" data-toggle="collapse" 
-                            data-parent="#accordian" data-target="#{{project.name}}_vms">
-                                <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-info" data-toggle="collapse" 
-                            data-parent="#accordian" data-target="#{{project.name}}_info">
-                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                            </button>
-                            <a href="/market/{{project.name}}" class="btn btn-primary" 
+                       
+                        <a href="/market/{{project.name}}" class="btn btn-primary" 
                             aria-label="Left Align"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                            <button type="button" data-toggle="modal" data-target="#add_Cluster_Project"
-                            class="btn btn-success" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning" data-toggle="collapse" 
-                            data-parent="#accordian" data-target="#{{project.name}}_settings">
-                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" data-toggle="modal" data-target="#delete_UI_Project"
-                            class="btn btn-danger" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 
-                            </button>
-                        </div> -->
-                    </div>
+                    
+                </div>
+                <div class="panel-body">
+                    
+                    <div class="row">
+                        <div class="col-md-7 pull-left">
+                                <h3>{{project}}'s details</h3>
+
+                        </div>
+                  
+                    </div>                        
+
                 </div>
                 <!-- <div id="{{project.name}}_vms" class="panel-collapse collapse">
                     <h4>your machines</h4>
@@ -136,7 +125,7 @@
                         </tbody>
                     </table>
                 </div> -->
-                {% endfor %}
+               
                 <div class="panel-footer">
                 </div>
             </div>
@@ -150,5 +139,6 @@
     {% include "modals/createVM.html" %}
 
 </div>
+{% endfor %}
 {% endblock %}
 

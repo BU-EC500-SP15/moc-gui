@@ -14,6 +14,7 @@ import query_helpers as helpers
 # render modal / button / table templates
 import html_helpers as html
 from models import Service
+from models import UIProject
 
 
 ####################
@@ -32,8 +33,7 @@ def front_page(request):
 
 def clouds(request): 
     """List projects and vms in user's clouds""" 
-    
-    createVMform = forms.Create_VM()
+
 
     user = helpers.retrieve_object("User", "user_name", request.session['user_name'])
     if user is not None:
@@ -49,10 +49,9 @@ def clouds(request):
 
     project_list = []
     for project in projects:
-        vm_list = []
 #        for vm in models.VM.objects.filter(ui_project=project):
 #            vm_list.append(vm)
-        project_list.append({'name':project.name, 'vm_list': vm_list})
+        project_list.append({'name':project.name})
 
     for project in dicts.test_project_list:
         project_list.append(project)
@@ -60,19 +59,102 @@ def clouds(request):
 
     return render(request, 'clouds.html', 
                   {'project_list': project_list, 
-                   'cloud_modals': html.cloud_modals(request), 
-                   'createVMform': createVMform })
+                   'cloud_modals': html.cloud_modals(request)
+                   })
 
+## Porject Control Page
+def control(request, project):
+    createVMform = forms.Create_VM()
+    
+    project = UIProject.objects.filter(name = project)
+
+
+    return render(request, 'control.html', 
+                  {'project': project, 
+                   'createVMform': createVMform })
+## Market Page
 def market(request, project, filter = 'all', service = '', action = ''):
+    def toggle_active (project, service):
+        #Get the models of the queried objects:
+        project = UIProject.objects.filter(name = project)
+        service = Service.objects.filter(name = service)
+
+        # Fails if a project or service does not exist, return an error. 
+        if len(project) == 0 or len(service) == 0:
+            return False
+
+        # Checks if the relation already exist
+        search = models.UIProject_service_list.objects.filter(project = project, service = service)
+        if len(search) > 0:
+            search[0].delete()
+        else:
+            uipr_serv = models.UIProject_service_list (service = service[0], project = project[0], type = 'NOR')
+            uipr_serv.save()
+        return True
+
+    def toggle_default (project, service):
+        #Get the models of the queried objects:
+        project = UIProject.objects.filter(name = project)
+        service = Service.objects.filter(name = service)
+
+        # Fails if a project or service does not exist, return an error. 
+        if len(project) == 0 or len(service) == 0:
+            return False
+
+        # Checks if the relation already exist
+        # Toggles the state of the relationship
+        search = models.UIProject_service_list.objects.filter(project = project, service = service)
+        if len(search) > 0:
+            if search[0].type == 'NOR':
+                search[0].type = 'DEA'
+            else:
+                search[0].type = 'NOR'
+            search[0].save()
+        else:
+            uipr_serv = models.UIProject_service_list (service = service[0], project = project[0], type = 'DEA')
+            uipr_serv.save()
+        return True
+
+    def check_status (service, project = project):
+        #Get the models of the queried objects:
+        project = UIProject.objects.filter(name = project)
+        service = Service.objects.filter(name = service)
+        
+        # Fails if a project or service does not exist, return an error. 
+        if len(project) == 0 or len(service) == 0:
+            return (False, False, 'Failure')
+
+        search = models.UIProject_service_list.objects.filter(project = project, service = service)
+        if len(search) == 0:
+            return (False, False)
+        elif len(search) > 0 and search[0].type == 'NOR':
+            return (True, False)
+        else:
+            return (True, True)
+
+
     if service != '' and action != '':
-        # Put functionality for toggling services here!
+        print('hit')
+        if action == 'toggle_active':
+            if toggle_active (project, service):
+                print('t_a_s')
+        else:
+            if toggle_default (project, service):
+                print ('t_d_s')
+        print(models.UIProject_service_list.objects.all())
+        print(check_status(service, project))
 
         # print 'action engage servise'
         # print 'Args:\n project: ' + project + ' filter: ' + filter + ' servise: ' + service + ' action: ' + action 
         
         # Return to the marketplace after performing an action. 
         return HttpResponseRedirect('/market/' + project + '/')
-    market_list = [x for x in Service.objects.all() if x.service_type == filter or filter == 'all']
+    market_list = [x.__dict__ for x in Service.objects.all() if x.service_type == filter or filter == 'all']
+    for x in market_list:
+        cs = check_status(x['name'], project)
+        x['act'] = cs[0]
+        x['dea'] = cs[1]
+
     return render(request, 'market.html', {'project': project, 'market_list': market_list})
 
 ################
