@@ -7,7 +7,7 @@
 /* html div over-rides */
 body {
     /* background options */
-    background-image: url("/static/blue_clouds.jpg");
+    background-image: url("/static/blue_bg.jpg");
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat; 

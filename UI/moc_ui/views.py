@@ -33,8 +33,7 @@ def front_page(request):
 
 def clouds(request): 
     """List projects and vms in user's clouds""" 
-    
-    createVMform = forms.Create_VM()
+
 
     user = helpers.retrieve_object("User", "user_name", request.session['user_name'])
     if user is not None:
@@ -50,10 +49,9 @@ def clouds(request):
 
     project_list = []
     for project in projects:
-        vm_list = []
 #        for vm in models.VM.objects.filter(ui_project=project):
 #            vm_list.append(vm)
-        project_list.append({'name':project.name, 'vm_list': vm_list})
+        project_list.append({'name':project.name})
 
     for project in dicts.test_project_list:
         project_list.append(project)
@@ -61,9 +59,20 @@ def clouds(request):
 
     return render(request, 'clouds.html', 
                   {'project_list': project_list, 
-                   'cloud_modals': html.cloud_modals(request), 
-                   'createVMform': createVMform })
+                   'cloud_modals': html.cloud_modals(request)
+                   })
 
+## Porject Control Page
+def control(request, project):
+    createVMform = forms.Create_VM()
+    
+    project = UIProject.objects.filter(name = project)
+
+
+    return render(request, 'control.html', 
+                  {'project': project, 
+                   'createVMform': createVMform })
+## Market Page
 def market(request, project, filter = 'all', service = '', action = ''):
     def toggle_active (project, service):
         #Get the models of the queried objects:

@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     # Sort of toggle function. Like toggle_service and toggle_default. Just add and remove in the regex with whatever
     # function name you want to pass to the view. 
     url(r'^(?!.+toggle_active\/?$|.+toggle_default\/?$)market\/(?P<project>.+)?\/$', market),
+    # project control page
+    url(r'^control\/(?P<project>.+)?\/$', control),
     # Market Place filtering functionality:
     #url(r'^market\/(?P<project>.+)\/(?P<filter>.+)\/?$', market),
     url(r'^(?!.+toggle_active\/?$|.+toggle_default\/?$)market\/(?P<project>.+)?\/(?P<filter>.+)\/?$', market),
