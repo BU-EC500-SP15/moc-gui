@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     # front page
     url(r'^$', front_page),
     # cloud splash
-    url(r'^clouds', clouds),
+    url(r'^projects', projects),
     # marketplace
     # Add & Remove are placeholders at the moment. I think we shouldn't have in particular add and remove, but a
     # Sort of toggle function. Like toggle_service and toggle_default. Just add and remove in the regex with whatever

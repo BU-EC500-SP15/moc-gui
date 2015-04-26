@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{request.session.user_name}}'s Clouds{% endblock %}
+{% block title %}{{request.session.user_name}}'s Projects{% endblock %}
 
 {% block content %}
 <div class="row vert-padded"></div>
@@ -38,8 +38,8 @@
                         <div class="col-md-7 pull-left">
                                 <h3>{{project.name}}</h3>
                         </div>
-                        <a href="/control/{{project.name}}" class="btn btn-primary" 
-                            aria-label="Left Align"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span></a>
+                        <a href="/control/{{project.name}}" class="btn btn-default" 
+                            aria-label="Left Align"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span></a>
                         <!-- <div class="col-md-5 btn-group pull-right" role="group">
                             <button type="button" class="btn btn-default" data-toggle="collapse" 
                             data-parent="#accordian" data-target="#{{project.name}}_vms">
@@ -143,11 +143,10 @@
         </div>
     </div>
 
-    {% for form_data in cloud_modals %}
-        {% include "modals/cloudModal.html" %}
+    {% for form_data in project_modals %}
+        {% include "modals/projectModal.html" %}
     {% endfor %}
 
-    {% include "modals/createVM.html" %}
 
 </div>
 {% endblock %}
