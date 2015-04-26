@@ -31,8 +31,8 @@ def front_page(request):
                  {'login_data': dicts.login_data, 'login_form': forms.Login(), 
                   'reg_modal': dicts.reg_modal, 'reg_form': forms.UserRegister()}) 
 
-def clouds(request): 
-    """List projects and vms in user's clouds""" 
+def projects(request): 
+    """List projects """ 
 
 
     user = helpers.retrieve_object("User", "user_name", request.session['user_name'])
@@ -57,9 +57,9 @@ def clouds(request):
         project_list.append(project)
 
 
-    return render(request, 'clouds.html', 
+    return render(request, 'projects.html', 
                   {'project_list': project_list, 
-                   'cloud_modals': html.cloud_modals(request)
+                   'project_modals': html.project_modals(request)
                    })
 
 ## Porject Control Page
@@ -166,7 +166,7 @@ def login(request):
     """View to Login a user
     
     Checks post credentials, redirects
-    to clouds or back to front page with error 
+    to projects or back to front page with error 
     """
     if request.method == 'POST':
         form = forms.Login(request.POST)
@@ -180,12 +180,12 @@ def login(request):
                 print "verifying password"
                 if user.verify_password(password=password):
                     request.session['user_name'] = user_name
-                    return HttpResponseRedirect('/clouds')
+                    return HttpResponseRedirect('/projects')
 
     # temporary workaround to auto-login
     print "using workaround"
     request.session['user_name'] = "jbell" 
-    return HttpResponseRedirect('/clouds')
+    return HttpResponseRedirect('/projects')
 
 def logout(request):
     """View to Logout of session 
@@ -216,7 +216,7 @@ def register(request):
                                                    password=password)
                 new_user.save()
                 request.session['user_name'] = user_name
-                return HttpResponseRedirect('/clouds')
+                return HttpResponseRedirect('/projects')
             else:
                 print "user %s exists" % user
         else:
@@ -266,7 +266,7 @@ def create_object(request, object_class):
                 print e 
         else:
             print post_form.errors
-    return HttpResponseRedirect('/clouds')
+    return HttpResponseRedirect('/projects')
 
 def delete_object(request, object_class):
     """Process POST form to delete generic database object"""
@@ -290,7 +290,7 @@ def delete_object(request, object_class):
                 print e 
         else:
             print post_form.errors
-    return HttpResponseRedirect('/clouds')
+    return HttpResponseRedirect('/projects')
 
 def control_vm(request, action, vm_name):
     if request.method == "PUT":

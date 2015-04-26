@@ -1,7 +1,7 @@
 import forms
 # modal format for 
-# CLOUDS PAGE
-def cloud_modals(request):
+# PROJECTS PAGE
+def project_modals(request):
     return  [{'id':'create_UI_Project', 'action':'/create/UIProject', 
               'title':'Create Project', 'form':forms.UIProject()},
              {'id':'delete_UI_Project', 'action':'/delete/UIProject', 
