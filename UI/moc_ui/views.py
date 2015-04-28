@@ -26,10 +26,11 @@ def front_page(request):
     
     Enter credentials to be processed by the login view 
     """ 
-    
     return render(request, 'front_page.html', 
-                 {'login_data': dicts.login_data, 'login_form': forms.Login(), 
-                  'reg_modal': dicts.reg_modal, 'reg_form': forms.UserRegister()}) 
+                 {'login_data': dicts.login_data, 'login_form': forms.Login()}) 
+    # return render(request, 'front_page.html', 
+    #              {'login_data': dicts.login_data, 'login_form': forms.Login(), 
+    #               'reg_modal': dicts.reg_modal, 'reg_form': forms.UserRegister()}) 
 
 def projects(request): 
     """List projects """ 
