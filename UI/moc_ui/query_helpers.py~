@@ -5,13 +5,9 @@ import dicts
 # Models to access our db's tables
 import models 
 
-import keystoneclient.v2_0.client as ksclient
-
 def retrieveUser(userName):
     try:
-	#right now, this gets username from Django DB.
-	#need to change so it queries Keystone
-        return models.User.objects.get(name=userName)	#get user object with username matching "userName"
+        return models.User.objects.get(name=userName)
     except: 
         return None 
 

@@ -5,7 +5,7 @@ class Login(forms.Form):
     user_name = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
-### DEPRECIATED; NOW USING KEYSTONE TO REGISTER
+# DEPRECIATED; NOW USING KEYSTONE TO REGISTER
 # class UserRegister(forms.ModelForm):
 #     user_name = forms.CharField(help_text="Please enter username.")
 #     password = forms.CharField(widget=forms.PasswordInput(), help_text="Please enter password.")

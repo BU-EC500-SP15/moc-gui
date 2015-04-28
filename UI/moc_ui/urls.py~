@@ -24,9 +24,9 @@ urlpatterns = patterns('',
 ##Form Processing
 urlpatterns += patterns('',
     # user management 
-    url(r'^login', login),        #user login
-    #url(r'^register', register),  #user registration (DEPRECIATED; NOW USE KEYSTONE)
-    url(r'^logout', logout),      #user logout
+    url(r'^login', login),
+    url(r'^register', register),
+    url(r'^logout', logout),
     ## DB dusting
     url(r'^create/(?P<object_class>.+)', create_object),
     url(r'^delete/(?P<object_class>.+)', delete_object),

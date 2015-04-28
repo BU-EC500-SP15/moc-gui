@@ -199,8 +199,6 @@ def logout(request):
     return HttpResponseRedirect('/')
 ## STILL EXISTS BECAUSE OWEN IS WORKING ON LOGIN PAGE 
 ## I DON'T WANT TO RESTRUCTURE REG FORMS, WILL BE Create_Object
-
-
 def register(request):
     """Register new user with keystone;
 
