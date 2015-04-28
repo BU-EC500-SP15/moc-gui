@@ -16,6 +16,10 @@ DEFAULT_FIELD_LEN = 255
 # Basic building blocks #
 #########################
 
+#Users currently stored in Models.
+#In future, users will be validated via Keystone
+#   so following User class will be depreciated(?)
+
 # User information 
 class User(models.Model):
     """A user of the marketplace UI"""
