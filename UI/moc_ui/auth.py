@@ -9,25 +9,27 @@ def loginUser(username, password,request):
 	Create keystone client for user; called on login
 	"""
 	print 'lucas-test-auth-loginUser'
+	
         keystone = ksclient.Client(
-	        auth_url = 'http://140.247.152.200:5507/v2.0',
+	        auth_url = 'http://140.247.152.207:5000/v2.0',
 		username = username,
        		password = password)
-    print 'lucas-test-auth-loginUser-succesfully'
+    	print 'lucas-test-auth-loginUser-succesfully'
 	return keystone
 
-def loginTenant(username, password, tenantName):
+def loginTenant(username, password, tenantName,request):
         """
 	Create keystone, nova, and glance clients for tenant; on tenant selection
 	"""
 	print 'lucas-test-auth-loginTenant'
         keystone = ksclient.Client(
-	        auth_url = 'http://140.247.152.200:5507/v2.0',
+	        auth_url = 'http://140.247.152.207:5000/v2.0',
 		username = username,
                 password = password,
                 tenant_name = tenantName)
+        print 'lucas-test-auth-loginTenant-succesfully'
 	nova = nvclient.Client(
-	        auth_url = 'http://140.247.152.200:5507/v2.0',
+	        auth_url = 'http://140.247.152.207:5000/v2.0',
 		username = username,
                 api_key = password,
 		project_id = tenantName)

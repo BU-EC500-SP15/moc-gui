@@ -15,12 +15,12 @@ import query_helpers as helpers
 import html_helpers as html
 from models import Service
 from models import UIProject
-<<<<<<< HEAD
+
 #keystone api
 import ui_api as api
-=======
+
 from models import ClusterProject
->>>>>>> 118330482b02bfef3f4a8fef17c32c63a362bcde
+
 
 
 ####################
@@ -78,10 +78,14 @@ def projects(request):
     print request.session['user_name'] 
     # print request.session['password']         
                         # pass session's user info to keystone for authentication
-    api.login(request.session['user_name'], 'xuhang0507',request)
+    api.joinTenant(request.session['user_name'], 'xuhang0507', 'ui', request)
     print 'lucas-test-api-login'
-    projects = api.listTenants()
-    return render(request, 'projects.html', {'user_projects': projects})
+    # projects = api.listTenants()
+    vms = api.listVMs()
+    print vms
+    print 'lucas-test-api-tenants'
+    # return render(request, 'projects.html', {'user_projects': projects})
+    return render(request,'projects.html')
         # else:
         # # temporary fix to ensure user's keystone session is used
         # api.login(request.session['username'], request.session['password'])
@@ -278,7 +282,7 @@ def login(request):
 
     # temporary workaround to auto-login
     print "using workaround"
-    request.session['user_name'] = "jbell" 
+    request.session['user_name'] = "xuh" 
     return HttpResponseRedirect('/projects')
 
 def logout(request):

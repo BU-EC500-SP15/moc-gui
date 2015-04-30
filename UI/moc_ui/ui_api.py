@@ -4,22 +4,21 @@ import views
 import time
 
 
-def login(username, password,request):
-	print 'lucas-test-api-login'
+def login(username, password, request):
+	print 'lucas-test-ui-api-login'
 	"""
 	Create keystone client for user
 	"""
-	
+	global keystone
+	keystone = loginUser(username, password, request)
 
-	request.session[keystone] = loginUser(username, password,request)
-
-def joinTenant(username, password, tenantName):
+def joinTenant(username, password, tenantName,request):
 	"""
 	Create keystone client for specified tenant;
 	User's credentials already authenticated on login
 	"""
         global keystone, nova, glance
-        keystone, nova, glance = loginTenant(username, password, tenantName)
+        keystone, nova, glance = loginTenant(username, password, tenantName,request)
 
 
 #### VMs ####
@@ -149,8 +148,11 @@ def listTenants():
 	Display list of tenants;
 	per user's keystone client, only shows tenants user is a member of
 	"""
+
         projects = []
+        print 'lucas-test-ui-api-list-tenants'
         tenant_list = keystone.tenants.list()
+        print 'lucsa-test-retreive-list'
         for tenant in tenant_list:
                 project = {
                 'name':tenant.name,
