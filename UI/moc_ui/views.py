@@ -15,6 +15,11 @@ import query_helpers as helpers
 import html_helpers as html
 from models import Service
 from models import UIProject
+#keystone api
+import ui_api as api
+
+from models import ClusterProject
+
 
 
 ####################
@@ -26,42 +31,61 @@ def front_page(request):
     
     Enter credentials to be processed by the login view 
     """ 
-    
+
     return render(request, 'front_page.html', 
                  {'login_data': dicts.login_data, 'login_form': forms.Login(), 
                   'reg_modal': dicts.reg_modal, 'reg_form': forms.UserRegister()}) 
 
 def projects(request): 
     """List projects """ 
+    # return render(request, 'projects.html')
+#     user = helpers.retrieve_object("User", "user_name", request.session['user_name'])
+#     if user is not None:
+#         try:
+#             projects = models.UIProject.objects.filter(users=user)
+#             print projects
+#         except Exception as e:
+#             print e 
+#             projects = []
+#     else:
+#         return HttpResponseRedirect('/')
 
 
-    user = helpers.retrieve_object("User", "user_name", request.session['user_name'])
-    if user is not None:
-        try:
-            projects = models.UIProject.objects.filter(users=user)
-            print projects
-        except Exception as e:
-            print e 
-            projects = []
-    else:
-        return HttpResponseRedirect('/')
+#     project_list = []
+#     for project in projects:
+# #        for vm in models.VM.objects.filter(ui_project=project):
+# #            vm_list.append(vm)
+#         project_list.append({'name':project.name})
+
+#     for project in dicts.test_project_list:
+#         project_list.append(project)
 
 
-    project_list = []
-    for project in projects:
-#        for vm in models.VM.objects.filter(ui_project=project):
-#            vm_list.append(vm)
-        project_list.append({'name':project.name})
-
-    for project in dicts.test_project_list:
-        project_list.append(project)
-
-
-    return render(request, 'projects.html', 
-                  {'project_list': project_list, 
-                   'project_modals': html.project_modals(request)
-                   })
-
+#     return render(request, 'projects.html', 
+#                   {'project_list': project_list, 
+#                    'project_modals': html.project_modals(request)
+#                    })
+    print 'lucas-test-enter-project-view'
+    # if request.method == 'POST':
+    # print 'lucas-test-request-mothod-post'
+    # form = forms.Login()
+    # if form.is_valid():
+    # print 'lucas-test-form-valid'
+    # request.session['username'] = form.cleaned_data['username']
+    # request.session['password'] = form.cleaned_data['password']
+    # print 'lucas-test-form-login'
+    print request.session['user_name'] 
+    # print request.session['password']         
+                        # pass session's user info to keystone for authentication
+    api.login(request.session['user_name'], request.session['password'] ,request)
+    print 'lucas-test-api-login'
+    projects = api.listTenants()
+    return render(request, 'projects.html', {'user_projects': projects})
+        # else:
+        # # temporary fix to ensure user's keystone session is used
+        # api.login(request.session['username'], request.session['password'])
+        # projects = api.listTenants()    
+        # return render(request, 'projects.html', {'user_projects': projects})
 ## Porject Control Page
 def control(request, project):
     createVMform = forms.Create_VM()
@@ -74,7 +98,7 @@ def control(request, project):
                    'createVMform': createVMform })
 ## Market Page
 def market(request, project, filter = 'all', service = '', action = ''):
-    def toggle_active (project, service):
+    def _toggle_active (project, service):
         #Get the models of the queried objects:
         project = UIProject.objects.filter(name = project)
         service = Service.objects.filter(name = service)
@@ -92,7 +116,25 @@ def market(request, project, filter = 'all', service = '', action = ''):
             uipr_serv.save()
         return True
 
-    def toggle_default (project, service):
+    def toggle_active (project, service):
+        #Get the models of the queried objects:
+        project = ClusterProject.objects.filter(name = project)
+        service = Service.objects.filter(name = service)
+
+        # Fails if a project or service does not exist, return an error. 
+        if len(project) == 0 or len(service) == 0:
+            return False
+
+        # Checks if the relation already exist
+        search = models.ClusterProject_service.objects.filter(project = project, service = service)
+        if len(search) > 0:
+            search[0].delete()
+        else:
+            uipr_serv = models.ClusterProject_service (service = service[0], project = project[0], default = False)
+            uipr_serv.save()
+        return True
+
+    def _toggle_default (project, service):
         #Get the models of the queried objects:
         project = UIProject.objects.filter(name = project)
         service = Service.objects.filter(name = service)
@@ -115,7 +157,41 @@ def market(request, project, filter = 'all', service = '', action = ''):
             uipr_serv.save()
         return True
 
-    def check_status (service, project = project):
+    def toggle_default (project, service):
+        #Get the models of the queried objects:
+        project = ClusterProject.objects.filter(name = project)
+        service = Service.objects.filter(name = service)
+
+        # Fails if a project or service does not exist, return an error. 
+        if len(project) == 0 or len(service) == 0:
+            return False
+
+        # Checks if the relation already exist
+        # Toggles the state of the relationship
+        search = models.ClusterProject_service.objects.filter(project = project, service = service)
+        search2 = models.ClusterProject_service.objects.filter(project = project)
+        print("Initial Query", service[0].service_type, [s for s in search2 if (s.service.service_type == service[0].service_type)])
+        for r in search2:
+            if r.service.service_type == service[0].service_type and r.service.name != service[0].name:
+                print("Not ", r.service)
+                r.default = False
+                r.save()
+        print("Output", [s for s in search2 if (s.service.service_type == service[0].service_type)])
+
+
+
+        if len(search) > 0:
+            if not search[0].default:
+                search[0].default = True
+            else:
+                search[0].default = False
+            search[0].save()
+        else:
+            uipr_serv = models.ClusterProject_service (service = service[0], project = project[0], default = True)
+            uipr_serv.save()
+        return True
+
+    def _check_status (service, project = project):
         #Get the models of the queried objects:
         project = UIProject.objects.filter(name = project)
         service = Service.objects.filter(name = service)
@@ -132,6 +208,23 @@ def market(request, project, filter = 'all', service = '', action = ''):
         else:
             return (True, True)
 
+    def check_status (service, project = project):
+        #Get the models of the queried objects:
+        project = ClusterProject.objects.filter(name = project)
+        service = Service.objects.filter(name = service)
+        
+        # Fails if a project or service does not exist, return an error. 
+        if len(project) == 0 or len(service) == 0:
+            return (False, False, 'Failure')
+
+        search = models.ClusterProject_service.objects.filter(project = project, service = service)
+        if len(search) == 0:
+            return (False, False)
+        elif len(search) > 0 and not search[0].default:
+            return (True, False)
+        else:
+            return (True, True)
+
 
     if service != '' and action != '':
         print('hit')
@@ -141,7 +234,7 @@ def market(request, project, filter = 'all', service = '', action = ''):
         else:
             if toggle_default (project, service):
                 print ('t_d_s')
-        print(models.UIProject_service_list.objects.all())
+        #print(models.UIProject_service_list.objects.all())
         print(check_status(service, project))
 
         # print 'action engage servise'

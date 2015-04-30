@@ -60,7 +60,7 @@ class ClusterProject(forms.ModelForm):
 
     class Meta:
         model = models.ClusterProject
-        fields = ['name', 'cluster', 'ui_project']
+        fields = ['name',]#'cluster', 'ui_project']
 
 # vm actions
 class Create_VM(forms.Form):
