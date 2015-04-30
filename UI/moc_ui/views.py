@@ -15,12 +15,11 @@ import query_helpers as helpers
 import html_helpers as html
 from models import Service
 from models import UIProject
-<<<<<<< HEAD
 #keystone api
 import ui_api as api
-=======
+
 from models import ClusterProject
->>>>>>> 118330482b02bfef3f4a8fef17c32c63a362bcde
+
 
 
 ####################
@@ -78,7 +77,7 @@ def projects(request):
     print request.session['user_name'] 
     # print request.session['password']         
                         # pass session's user info to keystone for authentication
-    api.login(request.session['user_name'], 'xuhang0507',request)
+    api.login(request.session['user_name'], request.session['password'] ,request)
     print 'lucas-test-api-login'
     projects = api.listTenants()
     return render(request, 'projects.html', {'user_projects': projects})
