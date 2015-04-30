@@ -5,25 +5,25 @@ class Login(forms.Form):
     user_name = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
-# class UserRegister(forms.ModelForm):
-#     user_name = forms.CharField(help_text="Please enter username.")
-#     password = forms.CharField(widget=forms.PasswordInput(), help_text="Please enter password.")
-#     confirm_password = forms.CharField(widget=forms.PasswordInput(), )
+class UserRegister(forms.ModelForm):
+    user_name = forms.CharField(help_text="Please enter username.")
+    password = forms.CharField(widget=forms.PasswordInput(), help_text="Please enter password.")
+    confirm_password = forms.CharField(widget=forms.PasswordInput(), )
     
-#     class Meta:
-#         model = models.User
-#         fields = ['user_name',]
+    class Meta:
+        model = models.User
+        fields = ['user_name',]
 
-#     def save(self, force_insert=False, force_update=False, commit=True):
-#         new_user = super(UserRegister, self).save(commit=False)
-#         # Create new_user with 
-#         new_user = models.User(user_name=self.user_name)
-#         new_user.set_password(password=self.password)
-#         request.session['user_name'] = user_name
+    def save(self, force_insert=False, force_update=False, commit=True):
+        new_user = super(UserRegister, self).save(commit=False)
+        # Create new_user with 
+        new_user = models.User(user_name=self.user_name)
+        new_user.set_password(password=self.password)
+        request.session['user_name'] = user_name
 
-#         if commit:
-#             new_user.save()
-#         return new_user 
+        if commit:
+            new_user.save()
+        return new_user 
 
 # project actions
 class UIProject(forms.ModelForm):

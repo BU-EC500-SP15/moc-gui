@@ -3,21 +3,23 @@ from os import environ as env
 import views
 import time
 
-def login(username, password, auth_url):
+
+def login(username, password,request):
+	print 'lucas-test-api-login'
 	"""
 	Create keystone client for user
 	"""
-	global keystone
-	keystone = loginUser(username, password, auth_url)
+	
 
-def joinTenant(username, password, tenantName, auth_url):
+	request.session[keystone] = loginUser(username, password,request)
+
+def joinTenant(username, password, tenantName):
 	"""
 	Create keystone client for specified tenant;
 	User's credentials already authenticated on login
 	"""
-
         global keystone, nova, glance
-        keystone, nova, glance = loginTenant(username, password, tenantName, auth_url)
+        keystone, nova, glance = loginTenant(username, password, tenantName)
 
 
 #### VMs ####
@@ -39,11 +41,8 @@ def listVMs():
 		'vnc':'-'
 		}
 		if server.status != 'BUILD':
-		    vm['vnc'] = server.get_vnc_console('novnc')[u'console'][u'url']
-		    if u'private' in server.networks:
-		        vm['network'] = server.networks[u'private']
-		    else:
-		        vm['network'] = 'no network'
+			vm['vnc'] = server.get_vnc_console('novnc')[u'console'][u'url']
+			vm['network'] = server.networks[u'private']
 		vms.append(vm)
 	return vms
 
@@ -79,9 +78,9 @@ def createVM(VMname, imageName, flavorName):
 	"""
 	Create VM on current tenant with specified information
 	"""
-    image = nova.images.find(name=imageName)
+        image = nova.images.find(name=imageName)
 	fl = nova.flavors.find(name=flavorName)
-    nova.servers.create(VMname, image=image, flavor=fl, meta=None,files=None)
+        nova.servers.create(VMname, image=image, flavor=fl, meta=None,files=None)
 
 def createDefault(VMname):
 	"""Previously used for testing"""
@@ -193,6 +192,14 @@ def addUser(userName, roleName, tenantName):
 	tenant = [x for x in tenants if x.name==tenantName][0]
 	tenant.add_user(user, role)
 
+def deleteUser(userName):
+	"""
+	Adds a user to a tenant with specified role via keystone
+	"""
+	users = keystone.users.list()
+	user = [x for x in users if x.name==userName][0]
+	user.delete()
+
 def addRole(userName, roleName, tenantName):
 	"""
 	Adds a role to specified user in current tenant
@@ -222,6 +229,23 @@ def registerUser(userName, password, email):
 	Registers a new user with keystone
 	"""
 	keystone.users.create(userName, password=password, email=email)	
+
+def users():
+	"""
+	Create list of All the users in the system
+	"""
+        users = []
+        user_list = keystone.users.list()
+        for member in user_list:
+                roleNames = []
+                user = {
+                'name':member.name,
+                'id':member.id,
+                'enabled':member.enabled,
+                'email':member.email,
+                }
+                users.append(user)
+        return users
 
 def listUsers(tenant):
 	"""

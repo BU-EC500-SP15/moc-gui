@@ -15,6 +15,8 @@ import query_helpers as helpers
 import html_helpers as html
 from models import Service
 from models import UIProject
+#keystone api
+import ui_api as api
 
 
 ####################
@@ -26,43 +28,61 @@ def front_page(request):
     
     Enter credentials to be processed by the login view 
     """ 
+
     return render(request, 'front_page.html', 
-                 {'login_data': dicts.login_data, 'login_form': forms.Login()}) 
-    # return render(request, 'front_page.html', 
-    #              {'login_data': dicts.login_data, 'login_form': forms.Login(), 
-    #               'reg_modal': dicts.reg_modal, 'reg_form': forms.UserRegister()}) 
+                 {'login_data': dicts.login_data, 'login_form': forms.Login(), 
+                  'reg_modal': dicts.reg_modal, 'reg_form': forms.UserRegister()}) 
 
 def projects(request): 
     """List projects """ 
+    # return render(request, 'projects.html')
+#     user = helpers.retrieve_object("User", "user_name", request.session['user_name'])
+#     if user is not None:
+#         try:
+#             projects = models.UIProject.objects.filter(users=user)
+#             print projects
+#         except Exception as e:
+#             print e 
+#             projects = []
+#     else:
+#         return HttpResponseRedirect('/')
 
 
-    user = helpers.retrieve_object("User", "user_name", request.session['user_name'])
-    if user is not None:
-        try:
-            projects = models.UIProject.objects.filter(users=user)
-            print projects
-        except Exception as e:
-            print e 
-            projects = []
-    else:
-        return HttpResponseRedirect('/')
+#     project_list = []
+#     for project in projects:
+# #        for vm in models.VM.objects.filter(ui_project=project):
+# #            vm_list.append(vm)
+#         project_list.append({'name':project.name})
+
+#     for project in dicts.test_project_list:
+#         project_list.append(project)
 
 
-    project_list = []
-    for project in projects:
-#        for vm in models.VM.objects.filter(ui_project=project):
-#            vm_list.append(vm)
-        project_list.append({'name':project.name})
-
-    for project in dicts.test_project_list:
-        project_list.append(project)
-
-
-    return render(request, 'projects.html', 
-                  {'project_list': project_list, 
-                   'project_modals': html.project_modals(request)
-                   })
-
+#     return render(request, 'projects.html', 
+#                   {'project_list': project_list, 
+#                    'project_modals': html.project_modals(request)
+#                    })
+    print 'lucas-test-enter-project-view'
+    # if request.method == 'POST':
+    # print 'lucas-test-request-mothod-post'
+    # form = forms.Login()
+    # if form.is_valid():
+    # print 'lucas-test-form-valid'
+    # request.session['username'] = form.cleaned_data['username']
+    # request.session['password'] = form.cleaned_data['password']
+    # print 'lucas-test-form-login'
+    print request.session['user_name'] 
+    # print request.session['password']         
+                        # pass session's user info to keystone for authentication
+    api.login(request.session['user_name'], 'xuhang0507',request)
+    print 'lucas-test-api-login'
+    projects = api.listTenants()
+    return render(request, 'projects.html', {'user_projects': projects})
+        # else:
+        # # temporary fix to ensure user's keystone session is used
+        # api.login(request.session['username'], request.session['password'])
+        # projects = api.listTenants()    
+        # return render(request, 'projects.html', {'user_projects': projects})
 ## Porject Control Page
 def control(request, project):
     createVMform = forms.Create_VM()
