@@ -1,7 +1,30 @@
 #moc-gui
 Extending the MOC GUI
 
-###Meetings Briefs 
+Prerequisite:
+
+###Have prxychains Installed
+
+$ apt-get install proxychains
+$ vim /etc/proxychains.conf
+
+- // Comment out existing socks line at the end of file
+socks5 127.0.0.1 8000  //add this line
+
+Not necessary to be 8000, user whatever you want that larger tha 1024 and not 5000
+
+###Have this run in another terminal
+
+$ ssh -D 8000 your_username@140.247.152.200 -N 
+
+### Runserver
+Intead of doing ./runserver.sh only, do 
+
+proxychains ./runserver.sh  
+
+Then, check the terminal and you can see whether you log in. 
+
+####Meetings Briefs 
 
 #####Meeting on 4/2 with Jon Bell:
 
