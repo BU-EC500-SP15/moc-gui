@@ -3,8 +3,25 @@ import novaclient.v1_1.client as nvclient
 import glanceclient.v2.client as glclient
 import keystoneclient.v2_0.client as ksclient
 
+# New Login
 
-def loginUser(username, password,request):
+from keystoneclient.auth.identity import v2
+from keystoneclient import session
+from novaclient import client
+
+# Socks Stuff
+
+import socks
+import socket
+
+# Set up SOCKS proxy usage:
+
+s = socks.socksocket()
+socks.set_default_proxy(socks.SOCKS5, 'localhost', 5678) # Change the port here!
+socket.socket = socks.socksocket
+
+
+def loginUser(username, password, request):
         """
 	Create keystone client for user; called on login
 	"""
@@ -17,27 +34,38 @@ def loginUser(username, password,request):
     	print 'lucas-test-auth-loginUser-succesfully'
 	return keystone
 
-def loginTenant(username, password, tenantName,request):
-        """
+# redoing the login Sorry :c
+
+def _loginTenant (request, username, password, tenant_name):
+	auth_url = 'http://140.247.152.207:5000/v2.0'
+	auth = v2.Password(auth_url = auth_url, username = username, password = password, tenant_name = tenant_name)
+	sess = session.Session(auth=auth)
+	nova = client.Client('1.1', session=sess)
+
+	request.session['nova'] = nova
+
+
+def loginTenant(request, tenant_name):
+	"""
 	Create keystone, nova, and glance clients for tenant; on tenant selection
 	"""
+
+	username = request.session['username']
+	password = request.session['password']
+
 	print 'lucas-test-auth-loginTenant'
-        keystone = ksclient.Client(
-	        auth_url = 'http://140.247.152.207:5000/v2.0',
+	keystone = ksclient.Client(auth_url = 'http://140.247.152.207:5000/v2.0', username = username,
+		password = password, tenant_name = tenant_name)
+	print 'lucas-test-auth-loginTenant-succesfully'
+	nova = nvclient.Client(auth_url = 'http://140.247.152.207:5000/v2.0',
 		username = username,
-                password = password,
-                tenant_name = tenantName)
-        print 'lucas-test-auth-loginTenant-succesfully'
-	nova = nvclient.Client(
-	        auth_url = 'http://140.247.152.207:5000/v2.0',
-		username = username,
-                api_key = password,
-		project_id = tenantName)
+		api_key = password,
+		project_id = tenant_name)
 	glance_endpoint = keystone.service_catalog.url_for(service_type='image')
-        glance = glclient.Client(
-                glance_endpoint,
-                token = keystone.auth_token)
-	return keystone, nova, glance
+	glance = glclient.Client(glance_endpoint, token = keystone.auth_token)
+	return {'keystone': keystone, 'nova': nova, 'glance': glance}
+
+#return keystone, nova, glance
 
 
 ##### OUTDATED SECTION - USEFUL FOR TESTING

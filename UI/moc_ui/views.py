@@ -36,27 +36,26 @@ def front_page(request):
                   'reg_modal': dicts.reg_modal, 'reg_form': forms.UserRegister()}) 
 
 
-def projects(request): 
-    """List projects """ 
-    print 'lucas-test-enter-project-view'
-    print request.session['user_name'] 
-    api.joinTenant(request.session['user_name'], 'yourpassword', 'ui', request)
-    print 'lucas-test-api-login'
-    vms = api.listVMs()
-    print vms
-    print 'lucas-test-project-view-vms-above'
-    return render(request,'projects.html')
+def projects(request):
+    project_list = [{'name': 'ui'}]
+    return render(request, 'projects.html', 
+                  {'project_list': project_list, 
+                   'project_modals': html.project_modals(request)
+                   })
 
       
 ## Porject Control Page
 def control(request, project):
+    os_sess = api.joinTenant(request, project)
+    print("Nova is: ", os_sess['nova'])
     createVMform = forms.Create_VM()
     
     project = UIProject.objects.filter(name = project)
 
+    vms = api.listVMs(os_sess['nova'])
 
     return render(request, 'control.html', 
-                  {'project': project, 
+                  {'project': project, 'vms': vms,
                    'createVMform': createVMform })
 ## Market Page
 def market(request, project, filter = 'all', service = '', action = ''):
@@ -234,13 +233,14 @@ def login(request):
             if user is not None:
                 print "verifying password"
                 if user.verify_password(password=password):
-                    request.session['user_name'] = user_name
+                    request.session['username'] = user_name
+                    request.session['password'] = password
                     return HttpResponseRedirect('/projects')
 
     # temporary workaround to auto-login
-    print "using workaround"
-    request.session['user_name'] = "xuh" 
-    return HttpResponseRedirect('/projects')
+    #print "using workaround"
+    #request.session['user_name'] = "thsu8" 
+    #return HttpResponseRedirect('/projects')
 
 def logout(request):
     """View to Logout of session 

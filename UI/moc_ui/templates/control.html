@@ -3,7 +3,7 @@
 {% block title %}Control Panel{% endblock %}
 
 {% block content %}
-{% for project in project%}
+{% for project in project %}
 <div class="row vert-padded"></div>
 
 <div class="container-fluid">
@@ -49,6 +49,9 @@
                     <div class="row">
                         <div class="col-md-7 pull-left">
                                 <h3>{{project}}'s details</h3>
+                                {% for vm in vms %}
+                                <h4>{{vm.name}}</h4>
+                                {% endfor %}
 
                         </div>
                   

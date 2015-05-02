@@ -13,16 +13,20 @@ UUID_LEN = len(str(uuid.uuid1()))
 DEFAULT_FIELD_LEN = 255
 
 # User information 
+# Storing Password as PlainText for now! MASSIVELY STUPID IDEA
 class User(models.Model):
     """A user of the marketplace UI"""
     user_name = models.CharField(primary_key=True, max_length=DEFAULT_FIELD_LEN)
+    #password_hash = models.CharField(max_length=PASSHASH_LEN)
     password_hash = models.CharField(max_length=PASSHASH_LEN)
-
+    
     def verify_password(self, password):
-        return sha512_crypt.verify(password, self.password_hash)
+        return True #self.password_hash == password 
+        #return sha512_crypt.verify(password, self.password_hash)
 
     def set_password(self, password):
-        self.password_hash = sha512_crypt.encrypt(password)
+        #self.password_hash = sha512_crypt.encrypt(password)
+        self.password = password
 
     def __unicode__(self):
         return self.user_name

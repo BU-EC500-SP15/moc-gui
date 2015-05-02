@@ -32,11 +32,11 @@
                         </div>
                     </div>
                 </div>
-                {% for project in user_projects %}
+                {% for project in project_list %}
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-7 pull-left">
-                                <h3>{{project.desc}}</h3>
+                                <h3>{{project.name}}</h3>
                         </div>
                         <a href="/control/{{project.name}}" class="btn btn-default" 
                             aria-label="Left Align"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span></a>

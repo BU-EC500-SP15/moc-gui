@@ -12,18 +12,46 @@ def login(username, password, request):
 	global keystone
 	keystone = loginUser(username, password, request)
 
-def joinTenant(username, password, tenantName,request):
+def joinTenant(request, tenant_name):
 	"""
 	Create keystone client for specified tenant;
 	User's credentials already authenticated on login
 	"""
-        global keystone, nova, glance
-        keystone, nova, glance = loginTenant(username, password, tenantName,request)
+        #global keystone, nova, glance
+        #keystone, nova, glance = loginTenant(username, password, tenantName,request)
+        return loginTenant(request = request, tenant_name = tenant_name)
+        #keystone, nova, glance = request.session['keystone'], request.session['nova'], request.session['glance']
 
 
 #### VMs ####
 
-def listVMs():
+def listVMs(nova):
+	"""
+	Gather and list VMs' info for current tenant
+	"""
+	
+	vms = []
+	server_list = nova.servers.list()
+	for server in server_list:
+		vm = {
+		'name':server.name,
+		'id':server.id,
+ 		'status':server.status,
+ 		'image':nova.images.get(server.image[u'id']).name,
+		'flavor':nova.flavors.get(server.flavor[u'id']).name,
+ 		'network':'-',
+		'vnc':'-'
+		}
+		'''
+		if server.status != 'BUILD':
+			vm['vnc'] = server.get_vnc_console('novnc')[u'console'][u'url']
+			vm['network'] = server.networks[u'private']
+		'''
+		vms.append(vm)
+	return vms
+
+
+def _listVMs():
 	"""
 	Gather and list VMs' info for current tenant
 	"""
