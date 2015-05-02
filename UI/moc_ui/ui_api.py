@@ -12,13 +12,13 @@ def login(username, password, request):
 	global keystone
 	keystone = loginUser(username, password, request)
 
-def joinTenant(username, password, tenantName,request):
+def joinTenant(username, password, tenantName, request):
 	"""
 	Create keystone client for specified tenant;
 	User's credentials already authenticated on login
 	"""
         global keystone, nova, glance
-        keystone, nova, glance = loginTenant(username, password, tenantName,request)
+        keystone, nova, glance = loginTenant(username, password, tenantName, request)
 
 
 #### VMs ####

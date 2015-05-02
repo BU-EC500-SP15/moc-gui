@@ -17,7 +17,7 @@ def loginUser(username, password,request):
     	print 'lucas-test-auth-loginUser-succesfully'
 	return keystone
 
-def loginTenant(username, password, tenantName,request):
+def loginTenant(username, password, tenantName, request):
         """
 	Create keystone, nova, and glance clients for tenant; on tenant selection
 	"""
