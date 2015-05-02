@@ -38,12 +38,13 @@ def front_page(request):
 
 def projects(request): 
     """List projects """ 
-    print 'lucas-test-enter-project-view'
+    print 'Echoing username and password (PLAIN-TEXT SECURITY ISSUE)'
     print request.session['user_name'] 
+    print request.session['clear_pass']
     api.joinTenant(request.session['user_name'], request.session['clear_pass'], 'ui', request)
     print 'lucas-test-api-login'
-    vms = api.listVMs()
-    print vms
+    #vms = api.listVMs()
+    #print vms
     print 'lucas-test-project-view-vms-above'
     return render(request,'projects.html')
 
