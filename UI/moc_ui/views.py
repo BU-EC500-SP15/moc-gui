@@ -238,8 +238,8 @@ def login(request):
 
                     #what follows is a very, VERY nasty workaround
                     #PASSWORD STORED AS PLAINTEXT IN ORDER FOR login() to pass to Keystone
-
                     request.session['clear_pass'] = password
+
                     return HttpResponseRedirect('/projects')
 
     # temporary workaround to auto-login
