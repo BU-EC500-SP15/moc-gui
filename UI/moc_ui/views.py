@@ -40,7 +40,7 @@ def projects(request):
     """List projects """ 
     print 'lucas-test-enter-project-view'
     print request.session['user_name'] 
-    api.joinTenant(request.session['user_name'], 'yourpassword', 'ui', request)
+    api.joinTenant(request.session['user_name'], request.session['clear_pass'], 'ui', request)
     print 'lucas-test-api-login'
     vms = api.listVMs()
     print vms
