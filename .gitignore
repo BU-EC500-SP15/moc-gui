@@ -1,7 +1,7 @@
 *.pyc
 db.sqlite3
-UI/session/
-UI/venv/
+session/
+venv/
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
