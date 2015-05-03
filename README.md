@@ -26,7 +26,7 @@ To run this project we need to Python 2, Django 1.8, Pip, the OpenStack Python C
 
 ####4. Running the Server
 
-* 'python manage.py runserver 9000'
+* `python manage.py runserver 9000`
 * It's ready! You can now point your browser to http://localhost:9000/
 
 ####5. Current Functionality *and limitations*
