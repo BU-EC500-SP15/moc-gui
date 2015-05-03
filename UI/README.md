@@ -4,22 +4,24 @@ An alternative OpenStack Dashboard to Horizon for the MOC.
 ###Setup and Usage
 ---
 
-####1. Setup Devstack (OpenStack deployment)
-
-* git clone https://github.com/openstack-dev/devstack.git
-* cd devstack
-* ./stack.sh - initial setup
-* ./rejoin-stack.sh - to rejoin environment (after start up, if terminal closed)
-* ctrl-a 0 - select shell window
-* For VM to desktop copy/pasting, screen resizing, install virtualbox guest-utils (http://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm)
-
 ###### Recommended Environment
 
 * Linux VM with atleast 4GB RAM and 10GB Storage
 
+####1. Install Prerequistes
+
+Pip these things: pip <module_name> -install
+
+* python-openstackclient
+* PySock
+
+####2. Connect to the Harvard Cluster
+
+* Go here and follow these instructions:
+  * https://github.com/CCI-MOC/moc-public/wiki/EC500-Instructions
+
 ####2. Setup Django Projet
 
-* inside of ~/devstack, git clone https://github.com/CCI-MOC/UI.git
 * install django (https://docs.djangoproject.com/en/1.5/topics/install/)
 * inside of ~/devstack/UI, run python manage.py runserver 9000
 * port 9000 to avoid conflicts with Horizon
