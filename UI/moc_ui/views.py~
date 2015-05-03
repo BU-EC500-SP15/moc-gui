@@ -43,7 +43,7 @@ def projects(request):
     api.joinTenant(request.session['user_name'], 'bvangos', 'ui', request)
     print 'lucas-test-api-login'
     #vms = api.listVMs()
-   # print vms
+    print vms
     print 'lucas-test-project-view-vms-above'
     return render(request,'projects.html')
 

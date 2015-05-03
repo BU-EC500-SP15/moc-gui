@@ -145,7 +145,7 @@ input, select, textarea{
 
 
 
-
+.nav navbar-nav pull-left{top: 35px;}
 
 .nb-right .dd-menu {left:0;right:auto;}
 .nb-collapse .nb-nav.nb-right:last-child {
