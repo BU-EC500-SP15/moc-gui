@@ -21,12 +21,10 @@ class User(models.Model):
     password_hash = models.CharField(max_length=PASSHASH_LEN)
     
     def verify_password(self, password):
-        return True #self.password_hash == password 
-        #return sha512_crypt.verify(password, self.password_hash)
+        return sha512_crypt.verify(password, self.password_hash)
 
     def set_password(self, password):
-        #self.password_hash = sha512_crypt.encrypt(password)
-        self.password = password
+        self.password_hash = sha512_crypt.encrypt(password)
 
     def __unicode__(self):
         return self.user_name

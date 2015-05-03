@@ -1,4 +1,4 @@
-from auth import loginUser, loginTenant
+from auth import loginUser, loginTenant, get_nova, get_keystone, get_glance
 from os import environ as env
 import views
 import time

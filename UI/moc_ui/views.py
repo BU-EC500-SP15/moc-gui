@@ -46,13 +46,14 @@ def projects(request):
       
 ## Porject Control Page
 def control(request, project):
-    os_sess = api.joinTenant(request, project)
-    print("Nova is: ", os_sess['nova'])
     createVMform = forms.Create_VM()
+    print(request.session.__dict__)
     
-    project = UIProject.objects.filter(name = project)
+     # UIProject.objects.filter(name = project).__dict__
 
-    vms = api.listVMs(os_sess['nova'])
+    vms = api.listVMs(api.get_nova(request, project))
+
+    project = [project]
 
     return render(request, 'control.html', 
                   {'project': project, 'vms': vms,
@@ -233,6 +234,7 @@ def login(request):
             if user is not None:
                 print "verifying password"
                 if user.verify_password(password=password):
+                    request.session['user_name'] = user_name
                     request.session['username'] = user_name
                     request.session['password'] = password
                     return HttpResponseRedirect('/projects')
@@ -271,6 +273,8 @@ def register(request):
                                                    password=password)
                 new_user.save()
                 request.session['user_name'] = user_name
+                request.session['username'] = user_name
+                request.session['password'] = password
                 return HttpResponseRedirect('/projects')
             else:
                 print "user %s exists" % user

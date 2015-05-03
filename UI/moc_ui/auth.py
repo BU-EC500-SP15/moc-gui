@@ -65,6 +65,30 @@ def loginTenant(request, tenant_name):
 	glance = glclient.Client(glance_endpoint, token = keystone.auth_token)
 	return {'keystone': keystone, 'nova': nova, 'glance': glance}
 
+def get_keystone(request, tenant_name):
+	username = request.session['username']
+	password = request.session['password']
+	keystone = ksclient.Client(auth_url = 'http://140.247.152.207:5000/v2.0', username = username,
+		password = password, tenant_name = tenant_name)
+	return keystone
+
+def get_nova(request, tenant_name):
+	username = request.session['username']
+	password = request.session['password']
+	nova = nvclient.Client(auth_url = 'http://140.247.152.207:5000/v2.0',
+		username = username,
+		api_key = password,
+		project_id = tenant_name)
+	return nova
+
+def get_glance(request, tenant_name):
+	username = request.session['username']
+	password = request.session['password']
+	glance_endpoint = keystone.service_catalog.url_for(service_type='image')
+	glance = glclient.Client(glance_endpoint, token = keystone.auth_token)
+	return {'keystone': keystone, 'nova': nova, 'glance': glance}
+	
+
 #return keystone, nova, glance
 
 

@@ -40,22 +40,43 @@
 
                         </div>
                        
-                        <a href="/market/{{project.name}}" class="btn btn-primary" 
+                        <a href="/market/{{project}}" class="btn btn-primary" 
                             aria-label="Left Align"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
                     
                 </div>
                 <div class="panel-body">
                     
                     <div class="row">
-                        <div class="col-md-7 pull-left">
-                                <h3>{{project}}'s details</h3>
-                                {% for vm in vms %}
-                                <h4>{{vm.name}}</h4>
-                                {% endfor %}
-
-                        </div>
-                  
-                    </div>                        
+                        <h2>Project {{project}}'s VMs</h2>
+                    </div>     
+                    <row>
+                        <table class = "table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>ID</td>
+                                    <td>Status</td>
+                                    <td>Image</td>
+                                    <td>Flavour</td>
+                                    <td>Network</td>
+                                    <td>VNC</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for vm in vms %}
+                                <tr>
+                                    <td>{{vm.name}}</td>
+                                    <td>{{vm.id}}</td>
+                                    <td>{{vm.status}}</td>
+                                    <td>{{vm.image}}</td>
+                                    <td>{{vm.flavor}}</td>
+                                    <td>{{vm.network}}</td>
+                                    <td>{{vm.vnc}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </row>                   
 
                 </div>
                 <!-- <div id="{{project.name}}_vms" class="panel-collapse collapse">
