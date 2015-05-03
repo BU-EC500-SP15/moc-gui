@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     # Market Place filtering functionality:
     #url(r'^market\/(?P<project>.+)\/(?P<filter>.+)\/?$', market),
     url(r'^(?!.+toggle_active\/?$|.+toggle_default\/?$)market\/(?P<project>.+)?\/(?P<filter>.+)\/?$', market),
+
     # Tells the view to perform an action on a service. 
     url(r'^market\/(?P<project>.+)\/(?P<service>.+)\/(?P<action>toggle_active|toggle_default)\/?$', market),
 
@@ -26,8 +27,11 @@ urlpatterns = patterns('',
 	#VM pause/unpause
     url(r'^VM_active_state_toggle\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_active_state_toggle),
 
+	#VM default add
+	url(r'VM_add_default\/(?P<project>.+)\/?$', VM_add_default),
+
 	#VM add
-	url(r'VM_add\/(?P<project>.+)?\/(?P<VMid>.+)\/?$',  VM_add),
+	url(r'VM_add\/(?P<project>.+)?\/(?P<VMname>.+)?\/(?P<imageName>.+)?\/(?P<flavorName>.+)\/?$',  VM_add),
 
 	#VM delete
 	url(r'VM_delete\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_delete),

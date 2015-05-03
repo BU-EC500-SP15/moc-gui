@@ -67,8 +67,8 @@ def control(request, project):
                   {'project': project, 'vms': vms,
                    'createVMform': createVMform })
 
-# dummy views for actions
-
+# VM CONTROLS
+# VM pause/unpause
 def VM_active_state_toggle (request, project, VMid):
     print (project, VMid)
     if VMid[len(VMid)-1] == '/':
@@ -77,6 +77,7 @@ def VM_active_state_toggle (request, project, VMid):
     api.VM_active_state_toggle(nova, VMid)
     return HttpResponseRedirect('/control/' + project + '/')
 
+# VM Delete
 def VM_delete(request, project, VMid):
 	print (project, VMid)					#debugging
 	if VMid[len(VMid)-1] == '/':			#strip ending /
@@ -85,23 +86,7 @@ def VM_delete(request, project, VMid):
 	api.delete(nova, VMid)					#delete specified Nova object
 	return HttpResponseRedirect('/control/' + project + '/')	#back to control
 
-#NEEDS CHECKING
-def VM_add(request, project, VMname, imageName, flavorName):
-	print (project, VMname, imageName, flavorName)					#debugging
-	nova = api.get_nova(request, project)	#get nova object
-	api.createVM(nova, VMname, imageName, flavorName)			#add specified Nova object
-	return HttpResponseRedirect('/control/' + project + '/')	#back to control
-
-def VM_add_default(request, project):
-	print (project)
-	nova = api.get_nova(request, project)	#get nova object
-	api.createDefault(nova)
-	return HttpResponseRedirect('/control/' + project + '/')	#back to control
-
-
-#NEEDS (LESS) CHECKING
-
-
+# VM start
 def VM_start(request, project, VMid):
 	print (project, VMid)					#debugging
 	if VMid[len(VMid)-1] == '/':			#strip ending /
@@ -109,7 +94,8 @@ def VM_start(request, project, VMid):
 	nova = api.get_nova(request, project)	#get nova object
 	api.startVM(nova, VMid)					#start specified Nova object
 	return HttpResponseRedirect('/control/' + project + '/')	#back to control
-	
+
+# VM stop
 def VM_stop(request, project, VMid):
 	print (project, VMid)					#debugging
 	if VMid[len(VMid)-1] == '/':			#strip ending /
@@ -117,6 +103,46 @@ def VM_stop(request, project, VMid):
 	nova = api.get_nova(request, project)	#get nova object
 	api.stopVM(nova, VMid)					#stop specified Nova object
 	return HttpResponseRedirect('/control/' + project + '/')	#back to control
+
+# VM add default
+def VM_add_default(request, project):
+	print (project)
+	nova = api.get_nova(request, project)	#get nova object
+	api.createDefault(nova)
+	return HttpResponseRedirect('/control/' + project + '/')	#back to control
+
+# VM add custom
+def VM_add(request, project, VMname, imageName, flavorName):
+	print (project, VMname, imageName, flavorName)					#debugging
+	nova = api.get_nova(request, project)	#get nova object
+	api.createVM(nova, VMname, imageName, flavorName)			#add specified Nova object
+	return HttpResponseRedirect('/control/' + project + '/')	#back to control
+
+
+#def login(request):
+#    """View to Login a user
+#   
+#    Checks post credentials, redirects
+#    to projects or back to front page with error 
+#    """
+#    if request.method == 'POST':
+#        form = forms.Login(request.POST)
+#        if form.is_valid():
+#            print "form is valid"
+#            user_name = form.cleaned_data['user_name']
+#            password = form.cleaned_data['password']
+#
+#            user = helpers.retrieve_object("User", "user_name", user_name)
+#            if user is not None:
+#                print "verifying password"
+#                if user.verify_password(password=password):
+#                    request.session['user_name'] = user_name
+#                    request.session['username'] = user_name
+#                    request.session['password'] = password
+#                    return HttpResponseRedirect('/projects')
+
+
+
 
 ## Market Page
 def market(request, project, filter = 'all', service = '', action = ''):
