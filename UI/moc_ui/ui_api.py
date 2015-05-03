@@ -1,4 +1,4 @@
-from auth import loginUser, loginTenant, get_nova, get_keystone, get_glance
+from auth import  loginTenant, get_nova, get_keystone, get_glance
 from os import environ as env
 import views
 import time
@@ -108,31 +108,34 @@ def createVM(nova, VMname, imageName, flavorName):
 	"""
         image = nova.images.find(name=imageName)
 	fl = nova.flavors.find(name=flavorName)
-        nova.servers.create(VMname, image=image, flavor=fl, meta=None,files=None)
+	nics = [{"net-id": nova.networks.list()[0].id, "v4-fixed-ip": ''}]
+        nova.servers.create(VMname, image=image, flavor=fl, meta=None, files=None, nics=nics)
 
-def createDefault(nova, VMname):
-	"""Previously used for testing"""
-	fl = nova.flavors.find(name='m1.nano')
-	image = nova.images.find(name='cirros-0.3.2-x86_64-uec-ramdisk')
-	nova.servers.create(VMname, image=image, flavor=fl, meta=None,files=None)
+def createDefault(nova):
+	fl = nova.flavors.find(name='m1.small')
+	image = nova.images.find(name='cirros-default')
+	nics = [{"net-id": nova.networks.list()[0].id, "v4-fixed-ip": ''}]
+	nova.servers.create("new_VM", image=image, flavor=fl, meta=None, files=None, nics=nics)
 	
-def delete(nova, VMname): 
-	"""
-	Delete specified VM from current tenant
-	"""
+#delete VM
+def delete(nova, VMid): 
+	
+	#find server
 	servers_list = nova.servers.list()
 	server_exists = False
 	for s in servers_list:
-	    if s.name == VMname:
-		print("This server %s exists" % VMname)
+	    if s.id == VMid:
+		print("This server %s exists" % VMid)	#DEBUG
 		server_exists = True
 		break
+
+	#delete server
 	if not server_exists:
-	    print("server %s does not exist" % VMname)
+	    print("server %s does not exist" % VMid)	#DEBUG
 	else:
-	    print("deleting server..........")
+	    print("deleting server..........")		#DEBUG
 	    nova.servers.delete(s)
-	    print("server %s deleted" % VMname)	
+	    print("server %s deleted" % VMid)		#DEBUG
 
 
 ## VM Control Functions ## 
@@ -146,12 +149,15 @@ def editVM(nova, VM, flavor):
 	nova.servers.resize(VM, flavor)
 	#nova.servers.confirm_resize(VM)
 
+#power up VM
 def startVM(nova, VM):
 	nova.servers.start(VM)
 
-def pauseVM(nova, VM):
-	nova.servers.pause(VM)
+#shutdown VM
+def stopVM(nova, VM):
+	nova.servers.stop(VM)
 
+#pause/unpause VM
 def VM_active_state_toggle(nova, VMid):
 	if nova.servers.get(VMid).status == u'PAUSED':
 		nova.servers.unpause(VMid)
@@ -161,14 +167,7 @@ def VM_active_state_toggle(nova, VMid):
 		pass
 
 
-# Not yet implement / incorporated 
 
-# Currently called by VM_active_state_toggle depending on current state of VM
-def unpauseVM(nova, VM):
-	nova.servers.unpause(VM)		
-		
-def stopVM(nova, VM):
-	nova.servers.stop(VM)
 
 # Commenting useless stuff. We don't have the permission to do this 
 # + future keystone changes will render any implementation of such pointless. 
