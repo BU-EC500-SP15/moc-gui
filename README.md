@@ -10,18 +10,18 @@ To run this project we need to Python 2, Django 1.8, Pip, the OpenStack Python C
 * Install Python 2 (https://www.python.org/downloads/)
 * Install Django (https://docs.djangoproject.com/en/1.8/topics/install/)
 * Install Pip
-* Install the OpenStack Python Clients 'pip install python-openstackclient'
+* Install the OpenStack Python Clients `pip install python-openstackclient`
 * Install PySocks 'pip install PySocks'
 
 ####2. Installing the UI
 
 * Pull from this Repository. 
-* Run './syncdb.sh'
+* Run `./syncdb.sh`
 
 ####3. Connecting
 
 * Go here and follow these instructions: (https://github.com/CCI-MOC/moc-public/wiki/EC500-Instructions)
-* Make a proxy to connect to the Harvard Cluster. 'ssh -D 5678 your_username@140.247.152.200 -N'
+* Make a proxy to connect to the Harvard Cluster. `ssh -D 5678 your_username@140.247.152.200 -N`
 * You can change the port inside auth.py 
 
 ####4. Running the Server
