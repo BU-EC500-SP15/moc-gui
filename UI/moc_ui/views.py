@@ -44,7 +44,7 @@ def projects(request):
                    })
 
       
-## Porject Control Page
+## Project Control Page
 def control(request, project):
 
     createVMform = forms.Create_VM()
@@ -70,6 +70,39 @@ def VM_active_state_toggle (request, project, VMid):
     api.VM_active_state_toggle(nova, VMid)
     return HttpResponseRedirect('/control/' + project + '/')
 
+#NEEDS CHECKING
+def VM_add(request, project, VMid, VMname, imageName, flavorName):
+	print (project, VMid)					#debugging
+	if VMid[len(VMid)-1] == '/':			#strip ending /
+		VMid = VMid[:len(VMid)-1]
+	nova = api.get_nova(request, project)	#get nova object
+	api.createVm(nova, VMname, imageName, flavorName)			#add specified Nova object
+	return HttpResponseRedirect('/control/' + project + '/')	#back to control
+
+#NEEDS (LESS) CHECKING
+def VM_delete(request, project, VMid):
+	print (project, VMid)					#debugging
+	if VMid[len(VMid)-1] == '/':			#strip ending /
+		VMid = VMid[:len(VMid)-1]
+	nova = api.get_nova(request, project)	#get nova object
+	api.delete(nova, VMid)					#delete specified Nova object
+	return HttpResponseRedirect('/control/' + project + '/')	#back to control
+
+def VM_start(request, project, VMid):
+	print (project, VMid)					#debugging
+	if VMid[len(VMid)-1] == '/':			#strip ending /
+		VMid = VMid[:len(VMid)-1]
+	nova = api.get_nova(request, project)	#get nova object
+	api.startVM(nova, VMid)					#start specified Nova object
+	return HttpResponseRedirect('/control/' + project + '/')	#back to control
+	
+def VM_stop(request, project, VMid):
+	print (project, VMid)					#debugging
+	if VMid[len(VMid)-1] == '/':			#strip ending /
+		VMid = VMid[:len(VMid)-1]
+	nova = api.get_nova(request, project)	#get nova object
+	api.stopVM(nova, VMid)					#stop specified Nova object
+	return HttpResponseRedirect('/control/' + project + '/')	#back to control
 
 ## Market Page
 def market(request, project, filter = 'all', service = '', action = ''):
