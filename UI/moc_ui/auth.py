@@ -21,20 +21,19 @@ socks.set_default_proxy(socks.SOCKS5, 'localhost', 5678) # Change the port here!
 socket.socket = socks.socksocket
 
 
-def loginUser(username, password, request):
-        """
-	Create keystone client for user; called on login
-	"""
-	print 'lucas-test-auth-loginUser'
+# def loginUser(username, password, request):
+#         """
+# 	Create keystone client for user; called on login
+# 	"""
+# 	print 'lucas-test-auth-loginUser'
 	
-        keystone = ksclient.Client(
-	        auth_url = 'http://140.247.152.207:5000/v2.0',
-		username = username,
-       		password = password)
-    	print 'lucas-test-auth-loginUser-succesfully'
-	return keystone
+#         keystone = ksclient.Client(
+# 	        auth_url = 'http://140.247.152.207:5000/v2.0',
+# 		username = username,
+#        		password = password)
+#     	print 'lucas-test-auth-loginUser-succesfully'
+# 	return keystone
 
-# redoing the login Sorry :c
 
 def _loginTenant (request, username, password, tenant_name):
 	auth_url = 'http://140.247.152.207:5000/v2.0'

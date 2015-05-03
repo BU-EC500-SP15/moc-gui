@@ -16,18 +16,7 @@
                    
                             <h2 class="col-md-7 pull-left">  {{project}}'s <small>control panel</small></h2>
                         
-                            <div class="col-md-5 btn-group pull-right" role="group">
-                                
-                                <!--
-                                <button type='button' data-toggle="modal" data-target="#createClusterAccount" 
-                                class="btn btn-info" aria-label="Left"> 
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> OS Account
-                                </button>
-                                <button type='button' data-toggle="modal" data-target="#deleteClusterAccount" 
-                                class="btn btn-danger" aria-label="Left"> 
-                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> OS Account
-                                </button>
-                                -->
+                            <div class="col-md-5 btn-group pull-right" role="group">                        
                             </div>
                         </div>
                     </div>
@@ -95,77 +84,7 @@
                     </row>                   
 
                 </div>
-                <!-- <div id="{{project.name}}_vms" class="panel-collapse collapse">
-                    <h4>your machines</h4>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <td>vm name</td>
-                                <td>vm state</td>
-                                <td>vm image</td>
-                                <td>vm provider</td>
-                                <td>controls</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for vm in project.vm_list %}
-                            <tr>
-                                <td>{{vm.name}}</td>
-                                <td>{{vm.state}}</td>
-                                <td>{{vm.image}}</td>
-                                <td>{{vm.provider}}</td>
-                                <td>
-                                    <form action="/controlVM/" method="POST"><div class="btn-group" role="group">
-                                        {% csrf_token %}
-                                        {% if vm.state == 'off' %}
-                                        <button name="action" value="start" type="submit" class="btn btn-success" aria-label="Left Align">
-                                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                                        </button>
-                                        {% else %}
-                                        <button name="action" value="stop" type="submit" class="btn btn-warning" aria-label="Left Align">
-                                            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-                                        </button>
-                                        {% endif %}
-                                        <button name="action" value="VNC" type="submit" class="btn btn-info" aria-label="Left Align">
-                                            <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
-                                        </button>
-                                        <button name="action" value="settings" type="submit" class="btn btn-primary" aria-label="Left Align">
-                                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                                        </button>
-                                        <button name="action" value="stop" type="submit" class="btn btn-danger" aria-label="Left Align">
-                                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                                        </button>
-                                    </form></div>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div id="{{project.name}}_info" class="panel-collapse collapse">
-                    <h4>your usage</h4>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <td>name</td>
-                                <td>uptime</td>
-                                <td>% active</td>
-                                <td>% quota</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for vm in project.vm_list %}
-                            <tr>
-                                <td>{{vm.name}}</td>
-                                <td>300 days</td>
-                                <td>30%</td>
-                                <td>25%</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div> -->
-               
+                
                 <div class="panel-footer">
                 </div>
             </div>

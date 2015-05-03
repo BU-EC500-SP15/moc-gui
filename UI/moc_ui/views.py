@@ -17,7 +17,6 @@ from models import Service
 from models import UIProject
 #keystone api
 import ui_api as api
-
 from models import ClusterProject
 
 
@@ -37,6 +36,13 @@ def front_page(request):
 
 
 def projects(request):
+	"""
+		 Project page;
+
+    Login Tenant with which the user is associated
+	"""
+	project_name = 'ui'
+	tenant = api.jointTenant(request, project_name)
     project_list = [{'name': 'ui'}]
     return render(request, 'projects.html', 
                   {'project_list': project_list, 
@@ -47,23 +53,15 @@ def projects(request):
 ## Porject Control Page
 def control(request, project):
 
-    createVMform = forms.Create_VM()
-    print(request.session.__dict__)
-    
-     # UIProject.objects.filter(name = project).__dict__
-
+    createVMform = forms.Create_VM()  
     vms = api.listVMs(api.get_nova(request, project))
-
     project = [project]
-
     return render(request, 'control.html', 
                   {'project': project, 'vms': vms,
                    'createVMform': createVMform })
 
-# dummy views for actions
 
 def VM_active_state_toggle (request, project, VMid):
-    print (project, VMid)
     if VMid[len(VMid)-1] == '/':
         VMid = VMid[:len(VMid)-1]
     nova = api.get_nova(request, project)
@@ -202,20 +200,10 @@ def market(request, project, filter = 'all', service = '', action = ''):
 
 
     if service != '' and action != '':
-        print('hit')
         if action == 'toggle_active':
-            if toggle_active (project, service):
-                print('t_a_s')
+            if toggle_active (project, service):              
         else:
-            if toggle_default (project, service):
-                print ('t_d_s')
-        #print(models.UIProject_service_list.objects.all())
-        print(check_status(service, project))
-
-        # print 'action engage servise'
-        # print 'Args:\n project: ' + project + ' filter: ' + filter + ' servise: ' + service + ' action: ' + action 
-        
-        # Return to the marketplace after performing an action. 
+            if toggle_default (project, service):              
         return HttpResponseRedirect('/market/' + project + '/')
     market_list = [x.__dict__ for x in Service.objects.all() if x.service_type == filter or filter == 'all']
     for x in market_list:
@@ -266,6 +254,7 @@ def logout(request):
         sessionInfo = None
 
     return HttpResponseRedirect('/')
+
 ## STILL EXISTS BECAUSE OWEN IS WORKING ON LOGIN PAGE 
 ## I DON'T WANT TO RESTRUCTURE REG FORMS, WILL BE Create_Object
 def register(request):
