@@ -1,28 +1,47 @@
 #moc-gui
 Extending the MOC GUI
 
-Prerequisite:
 
-###Have prxychains Installed
 
-$ apt-get install proxychains
-$ vim /etc/proxychains.conf
+####1. Prerequisites
 
-- // Comment out existing socks line at the end of file
-socks5 127.0.0.1 8000  //add this line
+To run this project we need to Python 2, Django 1.8, Pip, the OpenStack Python Clients, and PySocks
 
-Not necessary to be 8000, user whatever you want that larger tha 1024 and not 5000
+* Install Python 2 (https://www.python.org/downloads/)
+* Install Django (https://docs.djangoproject.com/en/1.8/topics/install/)
+* Install Pip
+* Install the OpenStack Python Clients `pip install python-openstackclient`
+* Install PySocks 'pip install PySocks'
 
-###Have this run in another terminal
+####2. Installing the UI
 
-$ ssh -D 8000 your_username@140.247.152.200 -N 
+* Pull from this Repository. 
+* Run `./syncdb.sh`
 
-### Runserver
-Intead of doing ./runserver.sh only, do 
+####3. Connecting
 
-proxychains ./runserver.sh  
+* Go here and follow these instructions: (https://github.com/CCI-MOC/moc-public/wiki/EC500-Instructions)
+* Make a proxy to connect to the Harvard Cluster. `ssh -D 5678 your_username@140.247.152.200 -N`
+* You can change the port inside auth.py 
 
-Then, check the terminal and you can see whether you log in. 
+####4. Running the Server
+
+* `python manage.py runserver 9000`
+* It's ready! You can now point your browser to http://localhost:9000/
+
+####5. Current Functionality *and limitations*
+
+**We have:**
+* Login functionality
+* Project Storage
+* OpenStack Connectivity
+  * Tenant Access and Control
+* Project and Service association saved in DB. 
+
+**Limitations**
+* Login is implemented in an incredibly unsafe way. 
+* The various openstack clients are spun up everytime they are needed. Which is wildly inefficient. 
+* Services in the DB are fixtures. 
 
 ####Meetings Briefs 
 

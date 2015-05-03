@@ -172,22 +172,5 @@
       "name": "Harvard University",
       "auth_url": "http://140.247.152.207:35357/v2.0"
     }
-  },
-
-  {
-    "model": "moc_ui.ClusterProject",
-    "pk": 1,
-    "fields": {
-      "name": "big_data",
-      "token": ""
-    }
-  },
-  {
-    "model": "moc_ui.ClusterProject",
-    "pk": 2,
-    "fields": {
-      "name": "webservers",
-      "token": ""
-    }
   }
 ]

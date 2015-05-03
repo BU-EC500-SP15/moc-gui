@@ -20,6 +20,23 @@ urlpatterns = patterns('',
     url(r'^(?!.+toggle_active\/?$|.+toggle_default\/?$)market\/(?P<project>.+)?\/(?P<filter>.+)\/?$', market),
     # Tells the view to perform an action on a service. 
     url(r'^market\/(?P<project>.+)\/(?P<service>.+)\/(?P<action>toggle_active|toggle_default)\/?$', market),
+
+    # Control Functionality market\/(?P<project>.+)?\/(?P<filter>.+)\/?$
+
+	#VM pause/unpause
+    url(r'^VM_active_state_toggle\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_active_state_toggle),
+
+	#VM add
+	url(r'VM_add\/(?P<project>.+)?\/(?P<VMid>.+)\/?$',  VM_add),
+
+	#VM delete
+	url(r'VM_delete\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_delete),
+
+	#VM start
+	url(r'VM_start\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_start),
+
+	#VM stop
+	url(r'VM_stop\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_stop)
 )
 ##Form Processing
 urlpatterns += patterns('',

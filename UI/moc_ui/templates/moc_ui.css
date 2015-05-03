@@ -1,7 +1,7 @@
 /* over-arching overrides */
 @font-face {
-    font-family: packenham;
-    src: url("/static/packenham/packenham rg.ttf.ttf");
+    font-family: lane_narrow_regular;
+    src: url("/static/lane_narrow_regular/LANENAR_.ttf");
 }
 
 /* html div over-rides */
@@ -17,7 +17,7 @@ body {
     /* text defaults */
     /* color: #428BCA; /* light blue */
     color: #444; /* gray */
-    font-family: packenham;
+    font-family: lane_narrow_regular;
 
     /* margins for elements */
     padding: 25px 50px;
@@ -143,10 +143,6 @@ input, select, textarea{
 .nb-header
 {float:none !important;}
 
-
-
-
-
 .nb-right .dd-menu {left:0;right:auto;}
 .nb-collapse .nb-nav.nb-right:last-child {
     margin-right: 0;
@@ -186,7 +182,7 @@ input, select, textarea{
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 200px;
+    height: 65px;
     font-size: 18px;
     line-height: 60px;
 

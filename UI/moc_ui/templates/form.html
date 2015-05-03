@@ -4,9 +4,9 @@
     <div class="row form-group">
         {{ field.errors }}
             {% if field.name == 'user_name' %}
-                <p>Username</p>
-            {% elif field.name == 'password'%}
-                <p> Password </p>
+                <p>user name</p>
+            {% else %}
+                <p> {{ field.name }}</p>
             {% endif %}       
         {{ field }}
     </div>
