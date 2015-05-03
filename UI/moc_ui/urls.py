@@ -20,6 +20,9 @@ urlpatterns = patterns('',
     url(r'^(?!.+toggle_active\/?$|.+toggle_default\/?$)market\/(?P<project>.+)?\/(?P<filter>.+)\/?$', market),
     # Tells the view to perform an action on a service. 
     url(r'^market\/(?P<project>.+)\/(?P<service>.+)\/(?P<action>toggle_active|toggle_default)\/?$', market),
+
+    # Control Functionality market\/(?P<project>.+)?\/(?P<filter>.+)\/?$
+    url(r'^VM_active_state_toggle\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_active_state_toggle)
 )
 ##Form Processing
 urlpatterns += patterns('',

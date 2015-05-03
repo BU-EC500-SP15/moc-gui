@@ -46,6 +46,7 @@ def projects(request):
       
 ## Porject Control Page
 def control(request, project):
+
     createVMform = forms.Create_VM()
     print(request.session.__dict__)
     
@@ -58,6 +59,18 @@ def control(request, project):
     return render(request, 'control.html', 
                   {'project': project, 'vms': vms,
                    'createVMform': createVMform })
+
+# dummy views for actions
+
+def VM_active_state_toggle (request, project, VMid):
+    print (project, VMid)
+    if VMid[len(VMid)-1] == '/':
+        VMid = VMid[:len(VMid)-1]
+    nova = api.get_nova(request, project)
+    api.VM_active_state_toggle(nova, VMid)
+    return HttpResponseRedirect('/control/' + project + '/')
+
+
 ## Market Page
 def market(request, project, filter = 'all', service = '', action = ''):
     def _toggle_active (project, service):

@@ -51,6 +51,7 @@ def listVMs(nova):
 	return vms
 
 
+
 def _listVMs():
 	"""
 	Gather and list VMs' info for current tenant
@@ -73,7 +74,7 @@ def _listVMs():
 		vms.append(vm)
 	return vms
 
-def listImages():
+def listImages(glance):
 	"""
 	List images available to current tenant
 	"""
@@ -87,7 +88,7 @@ def listImages():
                 images.append(image)
         return images
 
-def listFlavors():
+def listFlavors(nova):
 	"""
 	List flavors available to current tenant
 	"""
@@ -101,7 +102,7 @@ def listFlavors():
 		flavors.append(flavor)
 	return flavors
 
-def createVM(VMname, imageName, flavorName):
+def createVM(nova, VMname, imageName, flavorName):
 	"""
 	Create VM on current tenant with specified information
 	"""
@@ -109,13 +110,13 @@ def createVM(VMname, imageName, flavorName):
 	fl = nova.flavors.find(name=flavorName)
         nova.servers.create(VMname, image=image, flavor=fl, meta=None,files=None)
 
-def createDefault(VMname):
+def createDefault(nova, VMname):
 	"""Previously used for testing"""
 	fl = nova.flavors.find(name='m1.nano')
 	image = nova.images.find(name='cirros-0.3.2-x86_64-uec-ramdisk')
 	nova.servers.create(VMname, image=image, flavor=fl, meta=None,files=None)
 	
-def delete(VMname): 
+def delete(nova, VMname): 
 	"""
 	Delete specified VM from current tenant
 	"""
@@ -137,7 +138,7 @@ def delete(VMname):
 ## VM Control Functions ## 
 ## VM = VM.id ##
 
-def editVM(VM, flavor):
+def editVM(nova, VM, flavor):
 	"""
 	Attempt to resize specified VM
 	Broken - needs confirmation of resize (after resize operation completion)
@@ -145,20 +146,32 @@ def editVM(VM, flavor):
 	nova.servers.resize(VM, flavor)
 	#nova.servers.confirm_resize(VM)
 
-def startVM(VM):
+def startVM(nova, VM):
 	nova.servers.start(VM)
 
-def pauseVM(VM):
+def pauseVM(nova, VM):
 	nova.servers.pause(VM)
 
+def VM_active_state_toggle(nova, VMid):
+	if nova.servers.get(VMid).status == u'PAUSED':
+		nova.servers.unpause(VMid)
+	elif nova.servers.get(VMid).status == u'ACTIVE':
+		nova.servers.pause(VMid)
+	else:
+		pass
+
+
 # Not yet implement / incorporated 
-def unpauseVM(VM):
+def unpauseVM(nova, VM):
 	nova.servers.unpause(VM)		
 		
-def stopVM(VM):
+def stopVM(nova, VM):
 	nova.servers.stop(VM)
-		
 
+# Commenting useless stuff. We don't have the permission to do this 
+# + future keystone changes will render any implementation of such pointless. 
+		
+'''
 ### Tenant ###
 
 def getTenant(tenantName):
@@ -206,10 +219,11 @@ def deleteTenant(tenantName):
 	tenants = keystone.tenants.list()
 	tenant = [x for x in tenants if x.name==tenantName][0]
 	keystone.tenants.delete(tenant)	
-
+'''
 
 ### User ###
 
+'''
 def addUser(userName, roleName, tenantName):
 	"""
 	Adds a user to a tenant with specified role via keystone
@@ -298,4 +312,4 @@ def listUsers(tenant):
                 users.append(user)
         return users
 
-
+'''

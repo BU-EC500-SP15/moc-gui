@@ -60,6 +60,7 @@
                                     <td>Flavour</td>
                                     <td>Network</td>
                                     <td>VNC</td>
+                                    <td>Actions</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,6 +73,21 @@
                                     <td>{{vm.flavor}}</td>
                                     <td>{{vm.network}}</td>
                                     <td>{{vm.vnc}}</td>
+                                    <td>
+                                        {% if vm.status = 'ACTIVE' %}
+                                        <div class="btn-group" role="group">
+                                            <a href= "/VM_active_state_toggle/{{project}}/{{vm.id}}" class="btn btn-default btn-danger" aria-label:"leftalign">
+                                                <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                                            </a>
+                                        </div>
+                                        {% else %}
+                                        <div class="btn-group" role="group">
+                                            <a href= "/VM_active_state_toggle/{{project}}/{{vm.id}}" class="btn btn-default btn-success" aria-label:"leftalign">
+                                                <span class="glyphicon glyphicon-play aria-hidden="true"></span>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
