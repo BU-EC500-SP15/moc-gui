@@ -162,6 +162,8 @@ def VM_active_state_toggle(nova, VMid):
 
 
 # Not yet implement / incorporated 
+
+# Currently called by VM_active_state_toggle depending on current state of VM
 def unpauseVM(nova, VM):
 	nova.servers.unpause(VM)		
 		
