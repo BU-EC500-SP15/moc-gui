@@ -38,9 +38,15 @@ def front_page(request):
 
 def projects(request):
 
-    project_name = 'ui'
-    tenant = api.joinTenant(request, project_name )
-    project_list = [{'name': project_name}]
+
+    tenant = api.joinTenant(request, 'ui')
+
+    project_name =  models.ClusterProject.objects.all()
+    project_list = []
+    for project in project_name:
+        project_list += [{'name': project}]
+    
+    
     return render(request, 'projects.html', 
                   {'project_list': project_list, 
                    'project_modals': html.project_modals(request)
@@ -50,9 +56,7 @@ def projects(request):
 ## Porject Control Page
 def control(request, project):
 
-    createVMform = forms.Create_VM()
-    print(request.session.__dict__)
-    
+    createVMform = forms.Create_VM()   
      # UIProject.objects.filter(name = project).__dict__
 
     vms = api.listVMs(api.get_nova(request, project))
@@ -148,16 +152,12 @@ def market(request, project, filter = 'all', service = '', action = ''):
         # Toggles the state of the relationship
         search = models.ClusterProject_service.objects.filter(project = project, service = service)
         search2 = models.ClusterProject_service.objects.filter(project = project)
-        print("Initial Query", service[0].service_type, [s for s in search2 if (s.service.service_type == service[0].service_type)])
+        
         for r in search2:
             if r.service.service_type == service[0].service_type and r.service.name != service[0].name:
-                print("Not ", r.service)
+               
                 r.default = False
                 r.save()
-        print("Output", [s for s in search2 if (s.service.service_type == service[0].service_type)])
-
-
-
         if len(search) > 0:
             if not search[0].default:
                 search[0].default = True
@@ -203,7 +203,6 @@ def market(request, project, filter = 'all', service = '', action = ''):
         else:
             return (True, True)
 
-
     if service != '' and action != '':
         print('hit')
         if action == 'toggle_active':
@@ -212,13 +211,7 @@ def market(request, project, filter = 'all', service = '', action = ''):
         else:
             if toggle_default (project, service):
                 print ('t_d_s')
-        #print(models.UIProject_service_list.objects.all())
-        print(check_status(service, project))
-
-        # print 'action engage servise'
-        # print 'Args:\n project: ' + project + ' filter: ' + filter + ' servise: ' + service + ' action: ' + action 
-        
-        # Return to the marketplace after performing an action. 
+       
         return HttpResponseRedirect('/market/' + project + '/')
     market_list = [x.__dict__ for x in Service.objects.all() if x.service_type == filter or filter == 'all']
     for x in market_list:
@@ -254,11 +247,6 @@ def login(request):
                     request.session['username'] = user_name
                     request.session['password'] = password
                     return HttpResponseRedirect('/projects')
-
-    # temporary workaround to auto-login
-    #print "using workaround"
-    #request.session['user_name'] = "thsu8" 
-    #return HttpResponseRedirect('/projects')
 
 def logout(request):
     """View to Logout of session 
