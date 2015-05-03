@@ -17,7 +17,8 @@ import socket
 # Set up SOCKS proxy usage:
 
 s = socks.socksocket()
-socks.set_default_proxy(socks.SOCKS5, 'localhost', 5678) # Change the port here!
+# Set up the Port number as the one used for connecting Harvard Cluster
+socks.set_default_proxy(socks.SOCKS5, 'localhost', 5507)
 socket.socket = socks.socksocket
 
 
