@@ -13,9 +13,9 @@
                 <div class="panel-heading">
                     <div class="panel-title">
                         <div class="row">
-                   
                             <h2 class="col-md-7 pull-left">  {{project}}'s <small>control panel</small></h2>
-                        
+                       		
+
                             <div class="col-md-5 btn-group pull-right" role="group">                        
                             </div>
                         </div>
@@ -37,6 +37,12 @@
                     
                     <div class="row">
                         <h2>{{project}}'s VMs</h2>
+			<a href="/VM_add/{{project}}/{{VMname}}/{{imageName}}/{{flavorName}}" class="btn btn-default btn-success" aria-label:"leftalign">
+				<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+			</a>
+			<a href="/VM_add_default/{{project}}" class="btn btn-default btn-success" aria-label:"leftalign">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</a>
                     </div>     
                     <row>
                         <table class = "table table-striped">
@@ -63,19 +69,29 @@
                                     <td>{{vm.network}}</td>
                                     <td>{{vm.vnc}}</td>
                                     <td>
+                                        <div class="btn-group" role="group">
                                         {% if vm.status = 'ACTIVE' %}
-                                        <div class="btn-group" role="group">
-                                            <a href= "/VM_active_state_toggle/{{project}}/{{vm.id}}" class="btn btn-default btn-danger" aria-label:"leftalign">
-                                                <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
-                                            </a>
-                                        </div>
+                                    		<a href= "/VM_active_state_toggle/{{project}}/{{vm.id}}" class="btn btn-default btn-warning" aria-label:"leftalign">
+                                        	<span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                                    		</a>
                                         {% else %}
-                                        <div class="btn-group" role="group">
-                                            <a href= "/VM_active_state_toggle/{{project}}/{{vm.id}}" class="btn btn-default btn-success" aria-label:"leftalign">
+                                            	<a href= "/VM_active_state_toggle/{{project}}/{{vm.id}}" class="btn btn-default btn-success" aria-label:"leftalign">
                                                 <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                                            </a>
-                                        </div>
+                                            	</a>
                                         {% endif %}
+                                        <a href = "VM_delete/{{project}}/{{vm.id}}" class="btn btn-default btn-danger" aria-label:"leftalign">
+						                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </a>
+                                        {% if vm.status = 'SHUTOFF' %}
+                                            <a href = "VM_start/{{project}}/{{vm.id}}" class="btn btn-default btn-success" aria-label:"leftalign">
+                                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                            </a>
+                                        {% else %}
+                                            <a href = "VM_stop/{{project}}/{{vm.id}}" class="btn btn-default btn-danger" aria-label:"leftalign">
+                                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                            </a>
+                                        {% endif %}
+					                    </div>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -100,4 +116,5 @@
 </div>
 {% endfor %}
 {% endblock %}
+
 
