@@ -1,7 +1,9 @@
 #moc-gui
-Extending the MOC GUI
+##Extending the MOC GUI
 
+### First, thanks to Alex Wong for editing and makeing our demo video, for more information, please go the the link 
 
+###Instruction
 
 ####1. Prerequisites
 
