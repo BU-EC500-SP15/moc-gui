@@ -24,7 +24,7 @@ To run this project we need to Python 2, Django 1.8, Pip, the OpenStack Python C
 
 * Go here and follow these instructions: (https://github.com/CCI-MOC/moc-public/wiki/EC500-Instructions)
 * Make a proxy to connect to the Harvard Cluster. `ssh -D your_proxy_port_number your_username@140.247.152.200 -N`
-  for example, `ssh -D 5507 xuh@140.247.152.200 -N`
+  * for example, `ssh -D 5507 xuh@140.247.152.200 -N`
 * You also need to change the port inside auth.py 
 
 ####4. Running the Server
@@ -32,24 +32,32 @@ To run this project we need to Python 2, Django 1.8, Pip, the OpenStack Python C
 * `./runserver.sh`
 * It's ready! You can now point your browser to http://localhost:9000/
 
-####5. Current Functionality *and limitations*
+####5. Interface Usage
 
-**We have:**
-* Login functionality
-* Project Storage
-* OpenStack Connectivity
-  * Tenant Access and Control
-* Project and Service association saved in DB. 
+* Login Page
+  * login as an existing keystone user, or register with the ui, using their keystone crediential
+* Project Page
+  * enter a project and this page lists all projects with which the user is associated 
+* Control Page (Project Management)
+  * create/edit/delete VMs
+  * access to marketplace page
+* Marketplace Page
+  * add/cancel services 
 
 **Limitations**
-* Login is implemented in an incredibly unsafe way. 
+* User's password is saved as plain-text in our database. 
 * The various openstack clients are spun up everytime they are needed. Which is wildly inefficient. 
-* Services in the DB are fixtures. 
+* Can only create default VMs. Cannot create custom VMs 
 
 ####Meetings Briefs 
 
-#####Meeting on 4/2 with Jon Bell:
+Jon, as our mentor, has been really helpful to our project and we really appreicate it. 
 
+#####Other meettings:
+
+* New Control of Flow
+* Keystone integration
+* ...
 
 #####Meeting on 3/31 with Jon Bell:
 * Starting making the market page in a generic way
@@ -104,7 +112,7 @@ To run this project we need to Python 2, Django 1.8, Pip, the OpenStack Python C
 #####FAQ
 
 * Why am I getting proxy issues?
-  * Rerun `ssh -D 5678 your_username@140.247.152.200 -N` and make sure that auth.py points to the right port.
+  * Rerun `ssh -D port_number your_username@140.247.152.200 -N` and make sure that auth.py points to the right port.
 
 * Why can't I log in?
   * Register yourself as a user! Use the sign up button. Make sure your username and password accurately mirror your Harvard Cluster information!
