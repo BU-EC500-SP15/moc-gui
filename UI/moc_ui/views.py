@@ -114,9 +114,21 @@ def VM_add_default(request, project):
 # VM add custom
 def VM_add(request, project, VMname, imageName, flavorName):
 	print (project, VMname, imageName, flavorName)					#debugging
+
+#	if request.method == 'POST':
+#		form = forms.Create_VM(request.POST)
+#		if form.is_valid():
+#			print "form is valid."
+#			nameVM = form.cleaned_data['VM_name']
+#			nameFlavor 
+
 	nova = api.get_nova(request, project)	#get nova object
 	api.createVM(nova, VMname, imageName, flavorName)			#add specified Nova object
 	return HttpResponseRedirect('/control/' + project + '/')	#back to control
+
+
+		
+
 
 
 #def login(request):
