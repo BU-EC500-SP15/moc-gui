@@ -1,7 +1,9 @@
 #moc-gui
 ##Extending the MOC GUI
 
- A demo video made and edited by our own Alex Wong is here: (video link here pls)
+ A demo video made and edited by our own Alex Wong is here: https://youtu.be/-kp3Lyf3cU4
+ 
+ Further instructions regarding a packaged VM have been sent via Piazza due to security issues.
 
 ###Instructions
 
