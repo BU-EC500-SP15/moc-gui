@@ -14,7 +14,11 @@ import socket
 # Set up SOCKS proxy usage:
 s = socks.socksocket()
 # Set up the Port number as the one used for connecting Harvard Cluster
+<<<<<<< HEAD
 socks.set_default_proxy(socks.SOCKS5, 'localhost', 5678)
+=======
+socks.set_default_proxy(socks.SOCKS5, 'localhost', 5507)
+>>>>>>> master
 socket.socket = socks.socksocket
 
 
@@ -83,4 +87,8 @@ def get_glance(request, tenant_name):
 # 	sess = session.Session(auth=auth)
 # 	nova = client.Client('1.1', session=sess)
 
+<<<<<<< HEAD
 # 	request.session['nova'] = nova
+=======
+# 	request.session['nova'] = nova
+>>>>>>> master
