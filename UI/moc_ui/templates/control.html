@@ -21,13 +21,51 @@
                         </div>
                     </div>
                 </div>
-                
+                <!---Marketplace--->
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-7 pull-left">
-                                <h3>{{project}}'s marketplace</h3>
-
+                            <h3>{{project}}'s marketplace</h3>
                         </div>
+<<<<<<< HEAD
+                        <a href="/market/{{project}}" class="btn btn-primary" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!---VM Control--->
+                    <div class="panel-body">
+                        <div class="row">
+                            <h2>{{project}}'s VMs</h2>
+
+
+                            <!---Custom VM--->
+			                
+                            <!---<a href="/VM_add/{{project}}/{{VMname}}/{{imageName}}/{{flavorName}}" class="btn btn-default btn-success" aria-label:"leftalign">
+				                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+			                </a>--->
+
+                            <!---Default VM--->
+			                <a href="/VM_add_default/{{project}}" class="btn btn-default btn-success" aria-label:"leftalign">
+				                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			                </a>
+
+
+                        </div>     
+                        <row>
+                            <table class = "table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>ID</td>
+                                        <td>Status</td>
+                                        <td>Image</td>
+                                        <td>Flavour</td>
+                                        <td>Network</td>
+                                        <td>VNC</td>
+                                        <td>Actions</td>
+                                    </tr>
+                                </thead>
+=======
                        
                         <a href="/market/{{project}}" class="btn btn-primary" 
                             aria-label="Left Align"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
@@ -58,6 +96,7 @@
                                     <td>Actions</td>
                                 </tr>
                             </thead>
+>>>>>>> master
                             <tbody>
                             {% for vm in vms %}
                                 <tr>

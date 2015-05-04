@@ -1,5 +1,12 @@
 from django import forms
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+
 import models
+import novaclient.v1_1.client as nvclient
+import glanceclient.v2.client as glclient
+import keystoneclient.v2_0.client as ksclient
+import ui_api as api
 
 class Login(forms.Form):
     user_name = forms.CharField()
@@ -63,14 +70,27 @@ class ClusterProject(forms.ModelForm):
         fields = ['name',]#'cluster', 'ui_project']
 
 # vm actions
+
 class Create_VM(forms.Form):
     name = forms.CharField()
-
     cluster_projects = []
-    for p in models.ClusterProject.objects.all().values('name').distinct():
+    for p in models.ClusterProject.objects.all().values('name').distinct(): #for all 
         cluster_projects.append((p['name'], p['name']))
-
     cluster_project = forms.ChoiceField(widget=forms.Select, choices=cluster_projects)
+
+    #nova = api.get_nova(request, project)	#get nova object
+
+    #image choices
+    #image_choices = []
+    #for option in nova.images.list():
+    #    image_coices.append(str(option.name))    
+    #imageName = forms.ChoiceField(widget=forms.Select, choices=image_choices)
+
+    #flavor choices
+    #flavor_choices = []
+    #for option in nova.flavors.list():
+    #    flavor_choices.append(str(option.name))
+    #flavorName = forms.ChoiceField(widget=forms.Select, choices=flavor_choices)
 
 class Delete_VM(forms.Form):
     name = forms.CharField()

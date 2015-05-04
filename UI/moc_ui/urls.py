@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     # Market Place filtering functionality:
     #url(r'^market\/(?P<project>.+)\/(?P<filter>.+)\/?$', market),
     url(r'^(?!.+toggle_active\/?$|.+toggle_default\/?$)market\/(?P<project>.+)?\/(?P<filter>.+)\/?$', market),
+
     # Tells the view to perform an action on a service. 
     url(r'^market\/(?P<project>.+)\/(?P<service>.+)\/(?P<action>toggle_active|toggle_default)\/?$', market),
 
@@ -26,17 +27,21 @@ urlpatterns = patterns('',
 	#VM pause/unpause
     url(r'^VM_active_state_toggle\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_active_state_toggle),
 
-	#VM add
-	url(r'VM_add\/(?P<project>.+)?\/(?P<VMid>.+)\/?$',  VM_add),
+    #VM default add
+    url(r'VM_add_default\/(?P<project>.+)\/?$', VM_add_default),
 
-	#VM delete
-	url(r'VM_delete\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_delete),
+    #VM add
+    #url(r'VM_add\/(?P<project>.+)?\/(?P<VMname>.+)?\/(?P<imageName>.+)?\/(?P<flavorName>.+)\/?$',  VM_add),
+    
 
-	#VM start
-	url(r'VM_start\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_start),
+    #VM delete
+    url(r'VM_delete\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_delete),
 
-	#VM stop
-	url(r'VM_stop\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_stop)
+    #VM start
+    url(r'VM_start\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_start),
+
+    #VM stop
+    url(r'VM_stop\/(?P<project>.+)?\/(?P<VMid>.+)\/?$', VM_stop)
 )
 ##Form Processing
 urlpatterns += patterns('',
@@ -47,6 +52,8 @@ urlpatterns += patterns('',
     ## DB dusting
     url(r'^create/(?P<object_class>.+)', create_object),
     url(r'^delete/(?P<object_class>.+)', delete_object),
+    # VM creatoin
+    url(r'^VM_add', VM_add),
     # projects control
 #    url(r'^createProject', createProject),
 #    url(r'^deleteProject', deleteProject),
