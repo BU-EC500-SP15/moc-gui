@@ -1,9 +1,9 @@
 #moc-gui
 ##Extending the MOC GUI
 
-### First, thanks to Alex Wong for editing and makeing our demo video, for more information, please go the the link 
+ A demo video made and edited by our own Alex Wong is here: (video link here pls)
 
-###Instruction
+###Instructions
 
 ####1. Prerequisites
 
@@ -13,7 +13,7 @@ To run this project we need to Python 2, Django 1.8, Pip, the OpenStack Python C
 * Install Django (https://docs.djangoproject.com/en/1.8/topics/install/)
 * Install Pip
 * Install the OpenStack Python Clients `pip install python-openstackclient`
-* Install PySocks 'pip install PySocks'
+* Install PySocks `pip install PySocks`
 
 ####2. Installing the UI
 
@@ -89,13 +89,12 @@ To run this project we need to Python 2, Django 1.8, Pip, the OpenStack Python C
 
 #####TODO
 
-* State DB - checking users, endpoints, session info
-* With a State DB:
-  * Improvement of Keystone client sessions
-  * Currently inefficient
-  * Some privilege workarounds may be solved using private keystone endpoint, port 353572 (instead of public 5000)
-* Add error checking
-* Implement OCX Library
+* Implement Glance functions/buttons. 
+* Update the services fixture to more accurately reflect services available on the Harvard Cluster. 
+* Implement the new VM (Customized Settings) form/button. 
+* Make default VM button reflect choices made in the market place. 
+* Deliberate how to connect to multiple OpenStack Clusters. (current proxy connection implementation is possibly global)
+* Find a better way to keep keystone/nova/glance instances. 
 
 #####Known Issues
 
@@ -103,14 +102,9 @@ To run this project we need to Python 2, Django 1.8, Pip, the OpenStack Python C
 
 #####FAQ
 
-* Why does the UI not work anymore? 
-  * Run ./rejoin**stack.sh
+* Why am I getting proxy issues?
+  * Rerun `ssh -D 5678 your_username@140.247.152.200 -N` and make sure that auth.py points to the right port.
 
-* Why does OpenStack send connection errors? 
-  * You might need to rejoin or restack 
-
-* Why does Django say port already in use when running server?
-  * OpenStack may be using the port, either runserver first, or specify port (ie. python manage.py runserver 9999)
-
-* How can I test the OpenStack python API efficiently??
-  * Look at UI/marketUI/auth.py. Use the defined keystone, glance and nova clients via python command line (first run 'source ~/devstack/openrc')
+* Why can't I log in?
+  * Register yourself as a user! Use the sign up button. Make sure your username and password accurately mirror your Harvard Cluster information!
+  * You need to be registered to the Harvard Cluster! (https://github.com/CCI-MOC/moc-public/wiki/EC500-Instructions)
